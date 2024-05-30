@@ -103,7 +103,7 @@
     "wechat": ""
   },
   "analytics": {
-    "enable": false,
+    "enable": true,
     "google": {
       "measurementId": ""
     },
