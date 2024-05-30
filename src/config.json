@@ -1,43 +1,37 @@
 {
   "site": {
-    "url": "https://gyoza.lxchapu.com",
-    "title": "Gyoza",
-    "description": "这是一个使用 Astro 和 React 开发的博客主题。",
-    "keywords": "Gyoza,blog,Astro,theme,lxchapu,博客主题",
+    "url": "https://leewei0923.com",
+    "title": "满河星",
+    "description": "leewei的个人博客网站;leewei's blog site",
+    "keywords": "Gyoza,blog,Astro,leewei,leewei0923;博客",
     "lang": "zh-CN",
     "favicon": "/favicon.ico",
     "appleTouchIcon": "/apple-touch-icon.png"
   },
   "author": {
-    "name": "lxchapu",
-    "twitterId": "@lxchapu",
-    "avatar": "https://s2.loli.net/2024/04/30/ozsnuS5Ihf3xMBG.webp"
+    "name": "leewei",
+    "twitterId": "@Leewei60269181",
+    "avatar": "/avatar.svg"
   },
   "hero": {
-    "name": "Gyoza",
-    "bio": "A static blog template build with Astro and React.",
+    "name": "leewei",
+    "bio": "A Front-end developer",
     "description": "Clean, Cute, Fast.",
     "socials": [
       {
         "name": "Github",
         "icon": "icon-github",
-        "url": "https://github.com/lxchapu/astro-gyoza",
+        "url": "https://github.com/leewei0923",
         "color": "rgb(24, 23, 23)"
       },
       {
         "name": "X",
         "icon": "icon-x",
-        "url": "https://twitter.com/lxchapu",
+        "url": "https://twitter.com/Leewei60269181",
         "color": "rgb(36, 46, 54)"
-      },
-      {
-        "name": "Email",
-        "icon": "icon-mail",
-        "url": "mailto:lxchapu@outlook.com",
-        "color": "rgb(212, 70, 56)"
       }
     ],
-    "yiyan": "当第一颗卫星飞向大气层外，我们便以为自己终有一日会征服宇宙。"
+    "yiyan": "微微风簇浪，散作满河星。"
   },
   "color": {
     "accent": [
@@ -118,7 +112,7 @@
       "websiteId": ""
     },
     "microsoftClarity": {
-        "projectId": ""
+      "projectId": ""
     }
   }
 }
