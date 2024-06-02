@@ -1,0 +1,60 @@
+---
+import BookNav from '@/components/BookNav.astro'
+import MarkdownWrapper from '@/components/MarkdownWrapper.astro'
+import PostNav from '@/components/post/PostNav.astro'
+import MarkdownLayout from '@/layouts/MarkdownLayout.astro'
+import { getSortedBooks } from '@/utils/weread'
+import type { GetStaticPaths } from 'astro'
+
+export const getStaticPaths = (async () => {
+  const sortedBooks = await getSortedBooks()
+
+  return sortedBooks.map((book, index) => ({
+    params: { book: `${book.slug}` },
+    props: {
+      current: book,
+      prev: index > 0 ? sortedBooks[index - 1] : undefined,
+      next: index < sortedBooks.length - 1 ? sortedBooks[index + 1] : undefined,
+    },
+  }))
+}) satisfies GetStaticPaths
+
+const { current, prev, next } = Astro.props
+
+const title = current.slug.split('/')[1]
+console.log('title: ', title)
+
+const mdSlug = `/books/${current.slug}`
+
+const { headings, Content, remarkPluginFrontmatter } = await current.render()
+---
+
+<MarkdownLayout
+  title={title}
+  description={''}
+  image={current.data.cover}
+  mdTitle={title}
+  mdDescription={''}
+  mdSlug={mdSlug}
+>
+  <div class="max-w-[1100px] mx-auto px-4 md:px-8 py-16 grid lg:grid-cols-[auto_260px] gap-8">
+    <div>
+      <header class="space-y-4">
+        <h1 class="text-4xl font-bold text-center">
+          {title}
+        </h1>
+      </header>
+    </div>
+    <div class="col-start-1 min-w-0">
+      <MarkdownWrapper>
+        <Content />
+      </MarkdownWrapper>
+    </div>
+
+    <div>
+      <section class="space-y-6">
+        <BookNav prev={prev} next={next} />
+      </section>
+    </div>
+  </div>
+</MarkdownLayout>

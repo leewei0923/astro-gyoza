@@ -53,6 +53,25 @@ const config: Config = {
       zIndex: {
         '1': '1',
       },
+      keyframes: {
+        breath: {
+          '0%': {
+            transform: 'scale(0.60)',
+            'box-shadow': '0 0 0 0 rgba(102, 187, 106, 0.6)',
+          },
+          '60%': {
+            transform: 'scale(1)',
+            'box-shadow': '0 0 0 36px rgba(204, 73, 152, 0)',
+          },
+          '100%': {
+            transform: 'scale(0.60)',
+            'box-shadow': '0 0 0 0 rgba(204, 73, 152, 0)',
+          },
+        },
+      },
+      animation: {
+        breath: 'breath 2s ease-in-out infinite',
+      },
     },
   },
 }

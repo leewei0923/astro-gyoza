@@ -75,6 +75,11 @@
       "icon": "icon-flask"
     },
     {
+      "name": "阅读笔记",
+      "link": "/books",
+      "icon": "icon-hashtag"
+    },
+    {
       "name": "关于",
       "link": "/about",
       "icon": "icon-ghost"

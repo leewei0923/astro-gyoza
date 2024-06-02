@@ -1,0 +1,25 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import Highlight from '@/components/Highlight.astro'
+import { getCatagories, getAllSummary } from '@/utils/weread'
+import BooksList from '@/components/BooksList.astro'
+import BooksTag from '@/components/book/BooksTag.astro'
+
+const allCatagories = await getCatagories()
+const allBooks = await getAllSummary()
+---
+
+<PageLayout title="图书">
+  <div class="max-w-[800px] mx-auto px-4 py-16">
+    <header class="space-y-4 mb-8">
+      <h1 class="text-4xl font-bold">
+        <Highlight>书籍分类</Highlight>
+      </h1>
+      <p>共有 {allCatagories.length} 个分类。</p>
+    </header>
+
+    <BooksTag tags={allCatagories} />
+
+    <BooksList books={allBooks} />
+  </div>
+</PageLayout>

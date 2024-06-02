@@ -27,7 +27,7 @@
 }
 
 .markdown a {
-  @apply font-normal text-accent hover:underline underline-offset-2;
+  @apply font-normal text-accent hover:underline underline-offset-2 break-words;
 }
 
 .markdown a + .icon-external-link {

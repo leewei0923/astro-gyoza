@@ -45,9 +45,24 @@ const friendsCollection = defineCollection({
   }),
 })
 
+const bookCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    author: z.string(),
+    cover: z.string(),
+    progress: z.string(),
+    totalReadDay: z.number(),
+    readingTime: z.string(),
+    readingDate: z.date(),
+    isbn: z.number(),
+    lastReadDate: z.date(),
+  }),
+})
+
 export const collections = {
   posts: postsCollection,
   projects: projectsCollection,
   spec: specCollection,
   friends: friendsCollection,
+  books: bookCollection,
 }

@@ -1,6 +1,7 @@
 // 获取两个日期的相对时间
 export function getRelativeTime(startDate: Date, endDate = new Date()) {
   const diffSeconds = Math.floor((endDate.getTime() - startDate.getTime()) / 1000)
+
   if (diffSeconds < 0) {
     return null
   }
@@ -16,10 +17,11 @@ export function getRelativeTime(startDate: Date, endDate = new Date()) {
     return `${diffHours} 小时前`
   }
   const diffDays = Math.floor(diffHours / 24)
+
   if (diffDays < 10) {
     return `${diffDays} 天前`
   }
-  return null
+  return `${diffDays} 天前`
 }
 
 // 获取一个格式化的日期，格式为：2024 年 1 月 1 日 星期一
