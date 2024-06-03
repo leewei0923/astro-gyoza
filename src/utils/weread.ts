@@ -13,12 +13,12 @@ export async function getSortedBooks() {
   const allBooks = await getAllBooks()
 
   return allBooks.sort((a, b) => {
-    return a.data.lastReadDate.valueOf() - b.data.lastReadDate.valueOf()
+    return b.data.lastReadDate.valueOf() - a.data.lastReadDate.valueOf()
   })
 }
 
 export async function getAllSummary() {
-  const allBooks = await getAllBooks()
+  const allBooks = await getSortedBooks()
 
   const list: {
     cover: string
