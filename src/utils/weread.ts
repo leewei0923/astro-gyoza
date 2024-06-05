@@ -79,3 +79,54 @@ export async function getCatagories() {
 
   return Array.from(catagoriesList)
 }
+
+// 随机取一条笔记
+
+function getRndInteger(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+function parseAndHighlight(text: string) {
+  const preText = text.split('\n\n')
+  // 定义正则表达式匹配模式
+  const highlightPattern = /📌 (.+?)(?=\n|$)/g
+  const underlinePattern = / ⏱ (.+?)(?=\n|$)/g
+  const otherPattern = /\^[0-9-]+/g
+  const titlePattern = /\[!abstract].+/g
+
+  let title = text.match(titlePattern)?.[0] ?? ''
+  title = title.split(' ')[1]
+
+  const texts: string[][] = []
+
+  preText.map((text) => {
+    // 处理高亮标记
+    let highlightedText = text.match(highlightPattern)?.[0] ?? ''
+    highlightedText = highlightedText.replace(otherPattern, '')
+    // 处理划线标记
+    let timeText = text.match(underlinePattern)?.[0] ?? ''
+    timeText = timeText.replace(otherPattern, '')
+    if (highlightedText.length > 0 && timeText.length > 0) {
+      texts.push([`${highlightedText}--《${title}》`, timeText])
+    }
+  })
+
+  return {
+    texts,
+  }
+}
+
+export async function getRandNote() {
+  const allBooks = await getSortedBooks()
+
+  const allSliceSentences = allBooks.reduce((t, i) => {
+    return [...t, ...parseAndHighlight(i.body).texts]
+  }, new Array())
+
+  const len = allSliceSentences.length
+
+  return {
+    total: len,
+    sentences: allSliceSentences,
+  }
+}

@@ -22,7 +22,6 @@ export const getStaticPaths = (async () => {
 const { current, prev, next } = Astro.props
 
 const title = current.slug.split('/')[1]
-console.log('title: ', title)
 
 const mdSlug = `/books/${current.slug}`
 
