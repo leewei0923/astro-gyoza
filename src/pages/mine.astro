@@ -27,12 +27,6 @@ specList.map((md) => {
   }
 })
 
-function getRndInteger(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-const randomText = sentences[getRndInteger(0, total)]
-
 const { Content } = await aboutConetnt[0].render()
 ---
 
@@ -42,10 +36,17 @@ const { Content } = await aboutConetnt[0].render()
       <h1 class="text-4xl font-bold">
         <Highlight>关于我以及我的项目</Highlight>
       </h1>
-      <section>
-        <p>{randomText[0]}</p>
-        <p>{randomText[1]}</p>
-      </section>
+
+      {
+        sentences.map((randomText) => {
+          return (
+            <section class="randomText" style="display: none;">
+              <p>{randomText[0]}</p>
+              <p>{randomText[1]}</p>
+            </section>
+          )
+        })
+      }
     </header>
 
     {
@@ -63,3 +64,16 @@ const { Content } = await aboutConetnt[0].render()
     <ProjectList />
   </div>
 </PageLayout>
+
+<script>
+  const sectionNodes:NodeListOf<HTMLElement> = document.querySelectorAll('.randomText')
+  const len = sectionNodes.length
+
+  function getRndInteger(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min
+  }
+
+  const random = getRndInteger(0, len);
+
+  sectionNodes[random].style.display = 'block'
+</script>
