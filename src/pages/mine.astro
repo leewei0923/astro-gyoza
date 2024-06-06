@@ -5,6 +5,7 @@ import Highlight from '@/components/Highlight.astro'
 import MarkdownWrapper from '@/components/MarkdownWrapper.astro'
 import ProjectList from '@/components/ProjectList.astro'
 import { getRandNote } from '@/utils/weread'
+import { RandomText } from '@/components/RandomText'
 
 const specList = await getCollection('spec')
 const { total, sentences } = await getRandNote()
@@ -37,16 +38,7 @@ const { Content } = await aboutConetnt[0].render()
         <Highlight>关于我以及我的项目</Highlight>
       </h1>
 
-      {
-        sentences.map((randomText) => {
-          return (
-            <section class="randomText" style="display: none;">
-              <p>{randomText[0]}</p>
-              <p>{randomText[1]}</p>
-            </section>
-          )
-        })
-      }
+      <RandomText sentences={sentences} total={total} client:only />
     </header>
 
     {
@@ -64,16 +56,3 @@ const { Content } = await aboutConetnt[0].render()
     <ProjectList />
   </div>
 </PageLayout>
-
-<script>
-  const sectionNodes:NodeListOf<HTMLElement> = document.querySelectorAll('.randomText')
-  const len = sectionNodes.length
-
-  function getRndInteger(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min
-  }
-
-  const random = getRndInteger(0, len);
-
-  sectionNodes[random].style.display = 'block'
-</script>
