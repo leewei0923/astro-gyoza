@@ -40,6 +40,7 @@ const config: Config = {
         root: 'rgb(var(--color-bg-root))',
         primary: 'rgb(var(--color-bg-primary))',
         secondary: 'rgb(var(--color-bg-secondary))',
+        card: 'var(--card-bg-primary)',
       },
       borderColor: {
         primary: 'rgb(var(--color-border-primary))',
