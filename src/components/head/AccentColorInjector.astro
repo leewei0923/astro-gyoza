@@ -28,6 +28,7 @@
   --color-text-primary: ${getRgbVal(chroma(themeColor.text.primary.light))};
   --color-text-secondary: ${getRgbVal(chroma(themeColor.text.secondary.light))};
   --color-border-primary: ${getRgbVal(chroma(themeColor.border.primary.light))};
+  --card-bg-primary: #DBF3FE;
 }
 [data-theme='dark'] {
   --color-accent: ${getRgbVal(chroma(accentColor.dark))};
@@ -37,6 +38,7 @@
   --color-text-primary: ${getRgbVal(chroma(themeColor.text.primary.dark))};
   --color-text-secondary: ${getRgbVal(chroma(themeColor.text.secondary.dark))};
   --color-border-primary: ${getRgbVal(chroma(themeColor.border.primary.dark))};
+  --card-bg-primary: #0AADF9;
 }`
     document.head.appendChild($style)
   }
