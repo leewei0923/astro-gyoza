@@ -2,9 +2,18 @@
 import PageLayout from '@/layouts/PageLayout.astro'
 import Highlight from '@/components/Highlight.astro'
 import { getAllPicList } from '@/utils/gallery'
-import { Gallery } from '@/components/gallery/Gallery'
+import { GalleryPage } from '@/components/gallery/GalleryPage'
+import type { GetStaticPaths } from 'astro'
+import PostPagination from '@/components/post/PostPagination.astro'
 
 const picList = await getAllPicList()
+
+const totalPage = Math.ceil(picList.length / 4)
+
+const getPageUrl = (page: number) => {
+  if (page === 1) return '/'
+  return `/gallery/${page}`
+}
 ---
 
 <PageLayout title="画廊">
@@ -15,6 +24,8 @@ const picList = await getAllPicList()
       </h1>
     </header>
 
-    <Gallery list={picList} client:only />
+    <GalleryPage list={picList.slice(0, 4) ?? []} client:only="react" />
+
+    {totalPage > 1 && <PostPagination current={1} total={totalPage} getPageUrl={getPageUrl} />}
   </div>
 </PageLayout>
