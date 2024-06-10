@@ -73,6 +73,9 @@ const config: Config = {
       animation: {
         breath: 'breath 2s ease-in-out infinite',
       },
+      textStroke: {
+        '-webkit-text-stroke': '2px rgb(var(--color-text-primary) / 0.1)',
+      },
     },
   },
 }

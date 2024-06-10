@@ -70,9 +70,9 @@
       "icon": "icon-archive"
     },
     {
-      "name": "项目",
+      "name": "画廊",
       "link": "/gallery",
-      "icon": "icon-flask"
+      "icon": "icon-instagram"
     },
     {
       "name": "阅读笔记",

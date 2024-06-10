@@ -59,10 +59,15 @@ const bookCollection = defineCollection({
   }),
 })
 
+const galleryCollection = defineCollection({
+  type: 'content',
+})
+
 export const collections = {
   posts: postsCollection,
   projects: projectsCollection,
   spec: specCollection,
   friends: friendsCollection,
   books: bookCollection,
+  gallery: galleryCollection,
 }
