@@ -37,3 +37,17 @@ author leewei
 - > 玄武湖 · 南京
 
 ```
+
+```
+---
+title 无锡·滨湖·河埒口
+desc 经常路过的地方
+date 2024-06-07
+author leewei
+---
+
+- img https://qi.7miaoyu.com/memos/2024/06/55d6067d-ab75-4cee-9426-3d359d5d48f3.jpg
+- > 滨湖大润发·KFC
+
+
+```

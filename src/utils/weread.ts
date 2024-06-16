@@ -116,6 +116,22 @@ function parseAndHighlight(text: string) {
   }
 }
 
+function getRandomElements<T>(arr: T[], count: number): T[] {
+  const result = []
+  const arrCopy = [...arr]
+
+  if (arr.length < count) {
+    throw new Error('Array does not have enough elements.')
+  }
+
+  for (let i = arrCopy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[arrCopy[i], arrCopy[j]] = [arrCopy[j], arrCopy[i]]
+  }
+
+  return arrCopy.slice(0, count)
+}
+
 export async function getRandNote() {
   const allBooks = await getSortedBooks()
 
@@ -125,8 +141,10 @@ export async function getRandNote() {
 
   const len = allSliceSentences.length
 
+  const sliceArr = getRandomElements(allSliceSentences, Math.min(len, 10))
+
   return {
-    total: len,
-    sentences: allSliceSentences,
+    total: Math.min(len, 10),
+    sentences: sliceArr,
   }
 }

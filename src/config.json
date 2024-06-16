@@ -65,6 +65,11 @@
       "icon": "icon-pantone"
     },
     {
+      "name": "标签",
+      "link": "/tags",
+      "icon": "icon-pen"
+    },
+    {
       "name": "归档",
       "link": "/archives",
       "icon": "icon-archive"

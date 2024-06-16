@@ -31,6 +31,7 @@ export function GalleryPage(GalleryProps: GalleryProps) {
   const onShowImgs = (imgs: string[], groupid: number) => {
     setCurrentImgs(imgs)
     setCurGroupId(groupid)
+    setImhIndex(0)
   }
 
   const hideImgs = () => {
