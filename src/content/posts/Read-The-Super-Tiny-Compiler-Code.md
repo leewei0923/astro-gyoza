@@ -9,7 +9,7 @@ draft: false
 
 今天看到这个star个数超多的，尝试读一读这个源码，也试试去了解。
 
-开始读源码前，要先看下这个注释的。带有这个注释，这个代码量是不止200行的。注释写的很详细。
+xxxxxxxxxx // 删除本地分支git branch -d localBranchName​// 删除远程分支git push origin --delete remoteBranchNamebash
 
 它的一个主要功能是用来将`Lisp`风格的代码，转换成`C`风格的代码。
 
