@@ -51,3 +51,32 @@ author leewei
 
 
 ```
+
+```
+---
+title 合肥·肥西·三河
+desc 热天去古镇游玩
+date 2024-07-21
+author leewei
+---
+
+- img https://qi.7miaoyu.com/myblog/2024/07/21/001.jpg
+- > 古南街
+
+- img https://qi.7miaoyu.com/myblog/2024/07/21/7ffd6c752971f9ec8c00b22528d4a5c.jpg
+- > 巷间小道
+
+- img https://qi.7miaoyu.com/myblog/2024/07/21/fba21554b4e75fd75f47cdbc4c365db.jpg
+- > 乡野之地
+
+- img https://qi.7miaoyu.com/myblog/2024/07/21/9b098402e3d78d8c8ac78d5c5827d1a.jpg
+- > 合肥滨湖天际线
+
+- img https://qi.7miaoyu.com/myblog/2024/07/21/ffc89dce9ad08c80762bdf7192e22c9.jpg
+- > 河岸一角
+
+- img https://qi.7miaoyu.com/myblog/2024/07/21/58230f3e41eefaa9826d3d4e9578b15.jpg
+- > 据说是合肥最好玩的地方
+
+
+```

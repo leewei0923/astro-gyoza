@@ -280,3 +280,340 @@ factory ThemeData({
   CupertinoThemeData cupertinoOverrideTheme
 })
 ```
+
+### Flutter 弹出输入框导致溢出
+
+```dart
+return Scaffold(
+      resizeToAvoidBottomInset: false,
+)
+
+```
+
+resizeToAvoidBottomInset：如果为true，则[body]和脚手架的浮动窗口小部件应自行调整大小，以避免屏幕键盘的高度由周围的[MediaQuery]的[MediaQueryData.viewInsets] bottom属性定义。例如，如果在支架上方显示了屏幕键盘，则可以调整主体的大小以避免键盘重叠，这可以防止键盘遮盖主体内部的小部件。默认为true。
+
+```dart
+import 'dart:async';
+
+
+import 'package:flutter/material.dart';
+
+import 'package:flutter_application_demo04/res/global/global.dart';
+
+import 'package:flutter_application_demo04/res/util/hexColor.dart';
+
+import 'package:flutter_application_demo04/res/widgets/load_image.dart';
+
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:get/get.dart';
+
+import 'package:image_picker/image_picker.dart';
+
+import 'package:scan/scan.dart';
+
+
+import '../../../../res/net/dio_api.dart';
+
+import '../../../../res/net/service_repository.dart';
+
+import 'my_manager_team.dart';
+
+
+/// page--自定义二维码扫描页
+
+class ScanPage extends StatelessWidget {
+
+// 是否为重新绑定
+
+  final bool? isFromReset;
+
+
+  final bool? isPlus;
+
+// final ImagePicker picker = ImagePicker();
+
+  IconData lightIcon = Icons.flash_on;
+
+  final ScanController _controller = ScanController();
+
+
+  ScanPage({super.key, this.isFromReset, this.isPlus});
+
+
+  void getResult(String result, BuildContext context) {
+	//TODO
+
+    if (result.contains('conditions...')) {
+	// 上送扫描结果到服务端
+
+	//_bindGroup(code: result ?? '', isReset: isFromReset);
+
+    } else {
+	// 扫码错误
+
+      EasyLoading.showToast('无效的二维码');
+
+      Future.delayed(
+
+          const Duration(
+
+            seconds: 2,
+
+          ), () {
+	// 重新激活相机
+
+        _controller.resume();
+      });
+    }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      body: Stack(children: [
+
+        ScanView(
+
+          controller: _controller,
+
+          scanLineColor: HexColor('#13C2C2'),
+
+          onCapture: (data) {
+            _controller.pause();
+
+            getResult(data, context);
+          },
+
+        ),
+
+        Positioned(
+
+            top: 0,
+
+            left: 0,
+
+            right: 0,
+
+            child: SizedBox(
+
+              height: 120,
+
+              child: Padding(
+
+                padding: const EdgeInsets.only(left: 10, right: 10),
+
+                child: Row(
+
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                  children: [
+
+                    GestureDetector(
+
+                      onTap: () {
+                        Get.back();
+                      },
+
+                      child: const SizedBox(
+
+                        height: 30,
+
+                        width: 30,
+
+                        child: LoadAssetImage(
+
+                          'nav_back_white',
+
+                          fit: BoxFit.cover,
+
+                        ),
+
+                      ),
+
+                    ),
+
+                    const Text(
+
+                      '扫一扫',
+
+                      style: TextStyle(
+
+                          fontSize: 18,
+
+                          color: Colors.white,
+
+                          fontWeight: FontWeight.w600),
+
+                    ),
+
+                    GestureDetector(
+
+                      onTap: () {
+						// 相册
+						// 请求授权
+
+                        Global.requestPermission(
+
+                            isCamera: false,
+
+                            callBack: () {
+                              _getImage();
+                            });
+                      },
+
+                      child: const SizedBox(
+
+                        height: 30,
+
+                        width: 30,
+
+                        child: LoadAssetImage(
+
+                          'scaner_album',
+
+                          fit: BoxFit.cover,
+
+                        ),
+
+                      ),
+
+                    ),
+
+                  ],
+
+                ),
+
+              ),
+
+            )),
+
+        Positioned(
+
+            top: 245.h,
+
+            left: 0,
+
+            right: 0,
+
+            child: const Center(
+
+              child: Text(
+
+                '我是自定义扫码相机',
+
+                style: TextStyle(fontSize: 16, color: Colors.white),
+
+              ),
+
+            )),
+
+        const Positioned(
+
+            top: 80,
+
+            left: 0,
+
+            right: 0,
+
+            bottom: 0,
+
+            child: LoadAssetImage('scaner_bg')), // 全屏背景图
+
+// 闪光灯
+
+// Positioned(
+
+// left: 0,
+
+// right: 0,
+
+// bottom: 100,
+
+// child: StatefulBuilder(
+
+// builder: (BuildContext context, StateSetter setState) {
+
+// return MaterialButton(
+
+// child: Center(
+
+// child: Icon(
+
+// lightIcon,
+
+// size: 40,
+
+// color: Colors.white,
+
+// ),
+
+// ),
+
+// onPressed: () {
+
+// _controller.toggleTorchMode();
+
+// if (lightIcon == Icons.flash_on) {
+
+// lightIcon = Icons.flash_off;
+
+// } else {
+
+// lightIcon = Icons.flash_on;
+
+// }
+
+// setState(() {});
+
+// });
+
+// },
+
+// ),
+
+// ),
+
+      ]),
+
+    );
+  }
+
+
+  /// 从相册选择
+
+  Future _getImage() async {
+//选择相册
+
+    final ImagePicker _picker = ImagePicker();
+
+// Pick an image
+
+    final XFile? res = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (res != null) {
+      String? result = await Scan.parse(res.path);
+
+      print(result);
+
+      if (result != null) {
+        if (result!.contains('conditions...')) {
+// 上送扫描结果到服务端
+
+//_bindGroup(code: result ?? '', isReset: isFromReset);
+
+        }
+      } else {
+        EasyLoading.showToast('无效的二维码');
+
+// 重新激活相机
+
+        _controller.resume();
+      }
+    }
+  }
+```
