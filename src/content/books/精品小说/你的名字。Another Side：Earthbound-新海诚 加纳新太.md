@@ -4,14 +4,14 @@ bookId: '855069'
 author: 新海诚 加纳新太
 cover: https://cdn.weread.qq.com/weread/cover/11/YueWen_855069/t7_YueWen_855069.jpg
 reviewCount: 1
-noteCount: 3
+noteCount: 4
 readingStatus: 在读
-progress: 27%
-totalReadDay: 4
-readingTime: 0小时29分钟
+progress: 31%
+totalReadDay: 9
+readingTime: 0小时53分钟
 readingDate: 2024-08-04
 isbn: 9787550021105
-lastReadDate: 2024-08-12
+lastReadDate: 2024-08-15
 ---
 
 # 元数据
@@ -42,6 +42,11 @@ lastReadDate: 2024-08-12
 
 > 📌 [插图]
 > ⏱ 2024-08-12 20:59:56 ^855069-8-4099-4100
+
+### 1
+
+> 📌 心中有咖啡厅，哪里都是咖啡厅
+> ⏱ 2024-08-15 00:03:43 ^855069-10-5431-5445
 
 # 读书笔记
 
