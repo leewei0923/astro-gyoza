@@ -4,7 +4,7 @@ export function remarkEmbed() {
   return function (tree) {
     visit(tree, (node) => {
       if (node.type === 'leafDirective') {
-        if (!['youtube', 'bilibili', 'codepen'].includes(node.name)) return
+        if (!['youtube', 'bilibili', 'codepen', 'lyrics'].includes(node.name)) return
 
         const data = node.data || (node.data = {})
         const attributes = node.attributes || {}
@@ -43,6 +43,15 @@ export function remarkEmbed() {
               src: `https://codepen.io/${attributes.author}/embed/${id}`,
               frameBorder: 0,
               allowFullScreen: true,
+              loading: 'lazy',
+            }
+            break
+          case 'lyrics':
+            data.hProperties = {
+              class: 'lyrics',
+              title: 'lyrics',
+              src: `https://lyrics.net.cn/lyrics/${id}`,
+              frameBorder: 0,
               loading: 'lazy',
             }
             break
