@@ -54,7 +54,7 @@ const bookCollection = defineCollection({
     totalReadDay: z.number(),
     readingTime: z.string(),
     readingDate: z.date(),
-    isbn: z.number(),
+    isbn: z.number().nullable(), // 可能为空或undefined
     lastReadDate: z.date(),
   }),
 })

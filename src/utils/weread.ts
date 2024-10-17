@@ -27,7 +27,7 @@ export async function getAllSummary() {
     lastReadDate: Date
     readingTime: string
     totalReadDay: number
-    isbn: number
+    isbn: number | null
     id: string
     slug: string
   }[] = []
@@ -42,7 +42,7 @@ export async function getAllSummary() {
       lastReadDate: item.data.lastReadDate,
       readingTime: item.data.readingTime,
       totalReadDay: item.data.totalReadDay,
-      isbn: item.data.isbn,
+      isbn: item.data.isbn ?? null,
     })
   })
 
