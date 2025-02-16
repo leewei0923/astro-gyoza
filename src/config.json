@@ -110,14 +110,14 @@
   "analytics": {
     "enable": true,
     "google": {
-      "measurementId": ""
+      "measurementId": "GTM-5F32GZBD"
     },
     "umami": {
-      "serverUrl": "https://tj.icenew.top",
-      "websiteId": "5b1ca75d-62bb-4a90-b458-f2289d1ef3ec"
+      "serverUrl": "",
+      "websiteId": ""
     },
     "microsoftClarity": {
-      "projectId": ""
+      "projectId": "734A82565EE40988E1A5708ECA260450"
     }
   }
 }
