@@ -2,14 +2,14 @@
 import { getRelativeTime } from '@/utils/date'
 
 interface Props {
-  books: {
+  books: { 
     cover: string
     author: string
     progress: string
     lastReadDate: Date
     readingTime: string
     totalReadDay: number
-    isbn: number
+    isbn: number | null
     id: string
     slug: string
   }[]
