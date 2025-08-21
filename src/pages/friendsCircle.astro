@@ -1,0 +1,18 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import Highlight from '@/components/Highlight.astro'
+import SmallTalkContainer from '@/components/friendsCircle/SmallTalkContainer.astro'
+
+---
+
+<PageLayout title="朋友圈">
+  <div class="max-w-[800px] mx-auto px-4 py-16">
+    <header class="space-y-4 mb-8">
+      <h1 class="text-4xl font-bold">
+        <Highlight>朋友圈</Highlight>
+      </h1>
+    </header>
+  </div>
+
+  <SmallTalkContainer />
+</PageLayout>
