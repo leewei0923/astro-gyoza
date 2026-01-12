@@ -71,7 +71,7 @@ export const DebateMessage: React.FC<DebateMessageProps> = ({
   }
 
   const bubbleClasses = clsx(
-    'relative px-4 py-3 rounded-2xl max-w-[85%] shadow-sm',
+    'relative px-4 py-3 rounded-2xl max-w-[100%] sm:max-w-[85%] shadow-sm',
     effectiveAlign === 'left' ? 'rounded-tl-none' : 'rounded-tr-none',
     {
       'bg-blue-100 dark:bg-blue-900/30 text-blue-900 dark:text-blue-100': effectiveColor === 'blue',
@@ -93,8 +93,8 @@ export const DebateMessage: React.FC<DebateMessageProps> = ({
         effectiveAlign === 'right' ? 'flex-row-reverse' : 'flex-row',
       )}
     >
-      <SpeakerAvatar speaker={speaker} avatar={avatar} />
-      <div className={clsx('flex flex-col', effectiveAlign === 'right' ? 'items-end' : 'items-start')}>
+      <SpeakerAvatar speaker={speaker} avatar={avatar} className="hidden sm:flex" />
+      <div className={clsx('flex flex-col min-w-0 flex-1', effectiveAlign === 'right' ? 'items-end' : 'items-start')}>
         <span className="text-xs text-secondary mb-1 px-1">{speaker}</span>
         <div className={bubbleClasses}>
           <div className="prose dark:prose-invert max-w-none text-sm leading-relaxed">
