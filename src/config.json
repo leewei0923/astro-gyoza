@@ -15,8 +15,8 @@
   },
   "hero": {
     "name": "leewei",
-    "bio": "想的很多，做到很少",
-    "description": "有天发现代码不是我的全部，我也要有生活",
+    "bio": "独立开发者·AI创业者",
+    "description": "在做「拾记」\n 一个只属于你的记录系统",
     "socials": [
       {
         "name": "Github",
@@ -31,7 +31,7 @@
         "color": "rgb(36, 46, 54)"
       }
     ],
-    "yiyan": "微微风簇浪，散作满河星。"
+    "yiyan": "如果这是一个开始的话，我希望它会是很美好的。"
   },
   "color": {
     "accent": [
