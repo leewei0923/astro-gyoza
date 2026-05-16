@@ -108,9 +108,9 @@
     "wechat": ""
   },
   "analytics": {
-    "enable": true,
+    "enable": false,
     "google": {
-      "measurementId": "GTM-5F32GZBD"
+      "measurementId": ""
     },
     "umami": {
       "serverUrl": "",
