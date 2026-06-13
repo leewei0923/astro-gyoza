@@ -17,6 +17,14 @@ const { remarkPluginFrontmatter } = await entry.render()
   <h2 class="relative text-2xl font-bold">
     {entry.data.title}
     {
+      entry.data.aiGenerated && (
+        <span class="ml-2 inline-flex items-center gap-1 text-xs font-normal align-middle px-2 py-0.5 rounded-full border border-primary/30 text-secondary bg-primary/5">
+          <i class="iconfont icon-flask" />
+          AI 辅助
+        </span>
+      )
+    }
+    {
       entry.data.sticky > 0 && (
         <i class="absolute right-0 top-0 z-10 size-6 leading-none iconfont icon-pushpin text-red-500" />
       )

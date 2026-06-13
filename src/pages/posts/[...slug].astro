@@ -65,6 +65,12 @@ const lastMod = current.data.lastMod || current.data.date
       <header class="space-y-4">
         <h1 class="text-4xl font-bold text-center">
           {current.data.title}
+          {current.data.aiGenerated && (
+            <span class="ml-2 inline-flex items-center gap-1 text-xs font-normal align-middle px-2 py-0.5 rounded-full border border-primary/30 text-secondary bg-primary/5" title="本文包含 AI 辅助生成的内容">
+              <i class="iconfont icon-flask" />
+              AI 辅助
+            </span>
+          )}
         </h1>
         <PostMetaInfo
           class="justify-center"
