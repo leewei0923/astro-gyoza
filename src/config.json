@@ -65,19 +65,14 @@
       "icon": "icon-pantone"
     },
     {
-      "name": "归档",
-      "link": "/archives",
-      "icon": "icon-archive"
-    },
-    {
-      "name": "画廊",
-      "link": "/gallery",
-      "icon": "icon-instagram"
-    },
-    {
-      "name": "阅读笔记",
-      "link": "/books",
+      "name": "博客",
+      "link": "/blog",
       "icon": "icon-hashtag"
+    },
+    {
+      "name": "归档",
+      "link": "/blog/archives",
+      "icon": "icon-archive"
     },
     {
       "name": "关于",
@@ -101,8 +96,11 @@
     "apiKey": "",
     "indexName": ""
   },
-  "waline": {
-    "serverURL": ""
+  "giscus": {
+    "repo": "leewei0923/astro-gyoza",
+    "repoId": "",
+    "category": "Announcements",
+    "categoryId": ""
   },
   "sponsor": {
     "wechat": ""

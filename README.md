@@ -39,6 +39,17 @@ Enjoy it!
 
 前往：[Documentation](https://gyoza.lxchapu.com/posts/guide)
 
+## 💬 Comments
+
+文章评论由 [giscus](https://giscus.app/zh-CN) 和 GitHub Discussions 提供支持。启用评论前：
+
+1. 将评论仓库设为公开并启用 Discussions。
+2. 为仓库安装 [giscus App](https://github.com/apps/giscus)。
+3. 创建 `Announcements` 类型的 Discussion 分类。
+4. 在 giscus 配置页获取 `repoId` 和 `categoryId`，填入 `src/config.json` 的 `giscus` 配置。
+
+评论使用文章 slug 作为稳定标识。只有 frontmatter 中 `comments: true` 的文章会显示评论区。
+
 ## 🚀 Project Structure
 
 ```text

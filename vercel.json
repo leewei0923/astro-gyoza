@@ -1,0 +1,35 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/posts/:path*",
+      "destination": "/blog/posts/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/page/:path*",
+      "destination": "/blog/page/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/archives",
+      "destination": "/blog/archives",
+      "statusCode": 301
+    },
+    {
+      "source": "/tags",
+      "destination": "/blog/tags",
+      "statusCode": 301
+    },
+    {
+      "source": "/tags/:path*",
+      "destination": "/blog/tags/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/categories/:path*",
+      "destination": "/blog/categories/:path*",
+      "statusCode": 301
+    }
+  ]
+}

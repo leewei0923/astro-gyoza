@@ -1,8 +1,19 @@
 ---
-import { Waline } from './Waline'
-import { waline } from '@/config.json'
+import { GiscusComments } from './GiscusComments'
+import { giscus } from '@/config.json'
+
+interface Props {
+  term: string
+}
+
+const { term } = Astro.props
+const isConfigured = Boolean(giscus.repo && giscus.repoId && giscus.category && giscus.categoryId)
 ---
 
-<div>
-  {waline.serverURL && <Waline {...waline} client:visible />}
-</div>
+{
+  isConfigured && (
+    <div class="min-w-0">
+      <GiscusComments {...giscus} term={term} client:only="react" />
+    </div>
+  )
+}

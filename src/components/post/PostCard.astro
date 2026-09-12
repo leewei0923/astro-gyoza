@@ -12,7 +12,7 @@ const { entry } = Astro.props
 const { remarkPluginFrontmatter } = await entry.render()
 ---
 
-<a class="block relative py-8 focus-visible:outline-0" href={`/posts/${entry.slug}`}>
+<a class="block relative py-8 focus-visible:outline-0" href={`/blog/posts/${entry.slug}`}>
   <PostCardHoverOverlay client:only="react" />
   <h2 class="relative text-2xl font-bold">
     {entry.data.title}
@@ -36,7 +36,7 @@ const { remarkPluginFrontmatter } = await entry.render()
         <img
           class="float-right ml-3 mb-2 size-[156px] rounded-md object-cover select-none"
           src={entry.data.cover}
-          alt={entry.data.title} 
+          alt={entry.data.title}
           loading="lazy"
         />
       )
