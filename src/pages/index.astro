@@ -1,5 +1,7 @@
 ---
 import { author, hero, site } from '@/config.json'
+
+const [github, x] = hero.socials
 ---
 
 <!doctype html>
@@ -18,144 +20,512 @@ import { author, hero, site } from '@/config.json'
     <link rel="icon" href={site.favicon} />
     <link rel="apple-touch-icon" href={site.appleTouchIcon} />
     <title>{site.title}</title>
+    <script is:inline>
+      const savedLanguage = localStorage.getItem('home-language')
+      const initialLanguage =
+        savedLanguage === 'zh' || savedLanguage === 'en'
+          ? savedLanguage
+          : navigator.language.toLowerCase().startsWith('zh')
+            ? 'zh'
+            : 'en'
+
+      document.documentElement.dataset.lang = initialLanguage
+      document.documentElement.lang = initialLanguage === 'zh' ? 'zh-CN' : 'en'
+    </script>
   </head>
   <body>
     <main>
-      <img
-        class="avatar"
-        src={author.avatar}
-        alt={`${author.name} 的头像`}
-        width="112"
-        height="112"
-      />
-      <h1>{hero.name}</h1>
-      <p>{hero.bio}</p>
-      <nav aria-label="主要入口">
-        <a href="/projects">项目</a>
-        <a class="primary" href="/blog">博客</a>
-      </nav>
+      <section class="intro" aria-labelledby="intro-title">
+        <button class="language-switch" type="button" aria-label="Switch to English">
+          <span data-switch-label="zh">EN</span>
+          <span data-switch-label="en">中</span>
+        </button>
+
+        <div class="identity" data-language-section>
+          <img
+            class="avatar"
+            src={author.avatar}
+            alt={`${author.name} 的头像`}
+            width="64"
+            height="64"
+          />
+          <div>
+            <span class="eyebrow">
+              <span data-copy="zh">满河星 · SINCE 2024</span>
+              <span data-copy="en">MILKY RIVER · SINCE 2024</span>
+            </span>
+            <h1 id="intro-title">
+              <span data-copy="zh">你好，我是 {hero.name}。</span>
+              <span data-copy="en">Hi, I'm {hero.name}.</span>
+            </h1>
+          </div>
+        </div>
+
+        <div class="copy" data-language-section>
+          <p class="lead">
+            <span data-copy="zh">{hero.bio}</span>
+            <span data-copy="en">Indie developer · AI founder</span>
+          </p>
+          <p>
+            <span data-copy="zh">
+              我喜欢把零散的想法做成真正能用的产品。现在正在做「拾记」，一个只属于你的记录系统。
+            </span>
+            <span data-copy="en">
+              I enjoy turning scattered ideas into products people can actually use. I'm currently
+              building Shiji, a personal system for capturing what matters to you.
+            </span>
+          </p>
+          <p>
+            <span data-copy="zh">这里也存放我的文字、项目，以及一些仍在发生的生活。</span>
+            <span data-copy="en">
+              This is also where I keep my writing, projects, and fragments of life still in
+              progress.
+            </span>
+          </p>
+        </div>
+
+        <div class="entrances" data-entrances data-language-section aria-label="网站入口">
+          <a href="/blog">
+            <span data-copy="zh">读点文字</span>
+            <span data-copy="en">Read the blog</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a href="/projects">
+            <span data-copy="zh">看看项目</span>
+            <span data-copy="en">View projects</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <footer data-language-section>
+          <span>
+            <span data-copy="zh">在别处找到我</span>
+            <span data-copy="en">Find me elsewhere</span>
+          </span>
+          <div class="socials">
+            {
+              github && (
+                <a href={github.url} rel="me noreferrer">
+                  GitHub
+                </a>
+              )
+            }
+            {
+              x && (
+                <a href={x.url} rel="me noreferrer">
+                  X
+                </a>
+              )
+            }
+          </div>
+        </footer>
+      </section>
     </main>
+
+    <script is:inline>
+      const languageSwitch = document.querySelector('.language-switch')
+      const animatedSections = [...document.querySelectorAll('[data-language-section]')]
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+      let isSwitchingLanguage = false
+
+      const updateSwitch = () => {
+        const language = document.documentElement.dataset.lang || 'zh'
+        languageSwitch?.setAttribute(
+          'aria-label',
+          language === 'zh' ? 'Switch to English' : '切换到中文',
+        )
+        document
+          .querySelector('[data-entrances]')
+          ?.setAttribute('aria-label', language === 'zh' ? '网站入口' : 'Site links')
+      }
+
+      const setLanguage = (language) => {
+        document.documentElement.dataset.lang = language
+        document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en'
+        localStorage.setItem('home-language', language)
+        updateSwitch()
+      }
+
+      languageSwitch?.addEventListener('click', async () => {
+        if (isSwitchingLanguage) return
+
+        const nextLanguage = document.documentElement.dataset.lang === 'zh' ? 'en' : 'zh'
+
+        if (reducedMotion.matches) {
+          setLanguage(nextLanguage)
+          return
+        }
+
+        isSwitchingLanguage = true
+        languageSwitch.disabled = true
+
+        const buttonAnimation = languageSwitch.animate(
+          [
+            { transform: 'rotate(0deg) scale(1)' },
+            { transform: 'rotate(90deg) scale(0.88)', offset: 0.45 },
+            { transform: 'rotate(180deg) scale(1)' },
+          ],
+          { duration: 520, easing: 'cubic-bezier(.22, 1, .36, 1)' },
+        )
+
+        const exitAnimations = animatedSections.map((section, index) =>
+          section.animate(
+            [
+              { opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' },
+              { opacity: 0, transform: 'translateY(-7px)', filter: 'blur(3px)' },
+            ],
+            {
+              duration: 170,
+              delay: index * 18,
+              easing: 'cubic-bezier(.4, 0, 1, 1)',
+              fill: 'forwards',
+            },
+          ),
+        )
+
+        await Promise.all(exitAnimations.map((animation) => animation.finished))
+        setLanguage(nextLanguage)
+
+        const enterAnimations = animatedSections.map((section, index) =>
+          section.animate(
+            [
+              { opacity: 0, transform: 'translateY(9px)', filter: 'blur(3px)' },
+              { opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' },
+            ],
+            {
+              duration: 360,
+              delay: index * 34,
+              easing: 'cubic-bezier(.22, 1, .36, 1)',
+              fill: 'forwards',
+            },
+          ),
+        )
+
+        await Promise.all([
+          buttonAnimation.finished,
+          ...enterAnimations.map((animation) => animation.finished),
+        ])
+        const completedAnimations = [...exitAnimations, ...enterAnimations]
+        completedAnimations.forEach((animation) => animation.cancel())
+        languageSwitch.disabled = false
+        isSwitchingLanguage = false
+      })
+
+      updateSwitch()
+    </script>
   </body>
 </html>
 
 <style>
+  @font-face {
+    font-family: 'Atkinson';
+    src: url('/fonts/atkinson-regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Atkinson';
+    src: url('/fonts/atkinson-bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
   :root {
     color-scheme: light dark;
-    font-family:
-      Inter,
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      sans-serif;
-    background: #fafafa;
-    color: #18181b;
+    font-family: 'Atkinson', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+    color: #252522;
+    background: #f8f7f3;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   body {
+    position: relative;
     min-width: 320px;
     min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
   }
 
+  body::before {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    background: url('/botanical-bg.png') center / cover no-repeat;
+    content: '';
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
   main {
-    box-sizing: border-box;
+    width: min(100% - 3rem, 43rem);
     min-height: 100vh;
     min-height: 100dvh;
-    display: grid;
-    place-content: center;
-    justify-items: center;
-    padding: 3rem 1.5rem;
-    text-align: center;
-  }
-
-  .avatar {
-    width: 7rem;
-    height: 7rem;
-    border: 1px solid #e4e4e7;
-    border-radius: 999px;
-    object-fit: cover;
-  }
-
-  h1 {
-    margin: 2rem 0 0;
-    font-size: clamp(2.25rem, 8vw, 3.5rem);
-    line-height: 1;
-    letter-spacing: -0.04em;
-  }
-
-  p {
-    margin: 0.9rem 0 0;
-    color: #71717a;
-  }
-
-  nav {
+    margin: 0 auto;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-top: 2.5rem;
+    align-items: center;
+    padding: 5rem 0;
   }
 
-  a {
-    min-width: 4rem;
-    padding: 0.7rem 1.4rem;
-    border: 1px solid #d4d4d8;
-    border-radius: 999px;
-    color: inherit;
-    text-decoration: none;
+  .intro {
+    position: relative;
+    width: 100%;
+  }
+
+  [data-copy='en'],
+  [data-switch-label='en'] {
+    display: none;
+  }
+
+  html[data-lang='en'] [data-copy='zh'],
+  html[data-lang='en'] [data-switch-label='zh'] {
+    display: none;
+  }
+
+  html[data-lang='en'] [data-copy='en'],
+  html[data-lang='en'] [data-switch-label='en'] {
+    display: inline;
+  }
+
+  .language-switch {
+    position: absolute;
+    top: -3.25rem;
+    right: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 1px solid #d9d7cf;
+    border-radius: 50%;
+    color: #77766f;
+    background: rgb(248 247 243 / 72%);
+    font: inherit;
+    font-size: 0.75rem;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
     transition:
+      color 160ms ease,
       border-color 160ms ease,
       transform 160ms ease;
   }
 
-  a:hover {
-    border-color: #52525b;
-    transform: translateY(-2px);
+  .language-switch:hover {
+    border-color: #77766f;
+    color: #252522;
+    transform: rotate(6deg);
+  }
+
+  .language-switch:disabled {
+    cursor: default;
+  }
+
+  [data-language-section] {
+    will-change: transform, opacity, filter;
+  }
+
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 1.15rem;
+  }
+
+  .avatar {
+    width: 4rem;
+    height: 4rem;
+    flex: none;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: saturate(0.84);
+  }
+
+  .eyebrow {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #88877f;
+    font-size: 0.72rem;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+  }
+
+  .copy {
+    max-width: 38rem;
+    margin-top: 3rem;
+    color: #5e5d57;
+    font-size: 1.06rem;
+    line-height: 1.9;
+  }
+
+  .copy p {
+    margin: 0 0 0.9rem;
+  }
+
+  .copy .lead {
+    margin-bottom: 1.35rem;
+    color: #252522;
+    font-size: 1.18rem;
+  }
+
+  .entrances {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2.75rem;
+  }
+
+  .entrances a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-top: 1px solid #d9d7cf;
+    color: inherit;
+    font-size: 0.96rem;
+    text-decoration: none;
+    transition: border-color 160ms ease;
+  }
+
+  .entrances a span:last-child {
+    color: #8b8981;
+    transition: transform 160ms ease;
+  }
+
+  .entrances a:hover {
+    border-color: #252522;
+  }
+
+  .entrances a:hover span:last-child {
+    transform: translate(2px, -2px);
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #e4e2dc;
+    color: #929088;
+    font-size: 0.78rem;
+  }
+
+  .socials {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .socials a {
+    color: inherit;
+    text-underline-offset: 0.2em;
   }
 
   a:focus-visible {
-    outline: 2px solid #2563eb;
-    outline-offset: 3px;
+    outline: 2px solid #3467d6;
+    outline-offset: 4px;
   }
 
-  a.primary {
-    border-color: #18181b;
-    background: #18181b;
-    color: #fff;
+  @media (max-width: 560px) {
+    main {
+      width: min(100% - 2.5rem, 43rem);
+      align-items: flex-start;
+      padding: 4rem 0 3rem;
+    }
+
+    .identity {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .language-switch {
+      top: -1rem;
+    }
+
+    .copy {
+      margin-top: 2.4rem;
+      font-size: 1rem;
+      line-height: 1.82;
+    }
+
+    .entrances {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    footer {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 3.5rem;
+    }
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      background: #111113;
-      color: #fafafa;
+      color: #eeeee9;
+      background: #171715;
     }
 
-    .avatar,
-    a {
-      border-color: #3f3f46;
+    body::before {
+      opacity: 0.12;
+      filter: invert(1);
     }
 
-    p {
-      color: #a1a1aa;
+    .language-switch {
+      border-color: #3d3c38;
+      color: #aaa9a2;
+      background: rgb(23 23 21 / 72%);
     }
 
-    a:hover {
-      border-color: #a1a1aa;
+    .language-switch:hover {
+      border-color: #a9a8a1;
+      color: #eeeee9;
     }
 
-    a.primary {
-      border-color: #fafafa;
-      background: #fafafa;
-      color: #18181b;
+    .eyebrow,
+    footer {
+      color: #8e8d86;
+    }
+
+    .copy {
+      color: #b6b5ae;
+    }
+
+    .copy .lead {
+      color: #eeeee9;
+    }
+
+    .entrances a {
+      border-color: #3d3c38;
+    }
+
+    .entrances a:hover {
+      border-color: #a9a8a1;
+    }
+
+    footer {
+      border-color: #33322f;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    a {
+    .entrances a,
+    .entrances a span:last-child,
+    .language-switch {
       transition: none;
+    }
+
+    [data-language-section] {
+      will-change: auto;
     }
   }
 </style>
