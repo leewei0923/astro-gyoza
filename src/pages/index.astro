@@ -38,66 +38,72 @@ const [github, x] = hero.socials
     </header>
 
     <main>
-      <article aria-labelledby="intro-title" data-language-content>
-        <h1 id="intro-title">{hero.name}</h1>
+      <article data-language-content>
+        <section class="hero" aria-labelledby="intro-title">
+          <ul class="hero__socials">
+            {
+              hero.socials.map((social) => (
+                <li class="hero__social-item">
+                  <a
+                    class="hero__social"
+                    href={social.url}
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    title={social.name}
+                  >
+                    <span class="sr-only">{social.name}</span>
+                    {social.name.toLowerCase() === 'github' && (
+                      <svg class="hero__icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6a4.7 4.7 0 0 1 1.2-3.2 4.4 4.4 0 0 1 .1-3.2s1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2a4.4 4.4 0 0 1 .1 3.2 4.7 4.7 0 0 1 1.2 3.2c0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z" />
+                      </svg>
+                    )}
+                    {(social.name.toLowerCase() === 'x' ||
+                      social.name.toLowerCase() === 'twitter') && (
+                      <svg class="hero__icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 6.1-6.9Zm-1.3 19.5h2L6.5 3.2h-2.2l13.3 17.5Z" />
+                      </svg>
+                    )}
+                    {!['github', 'x', 'twitter'].includes(social.name.toLowerCase()) && (
+                      <svg
+                        class="hero__icon hero__icon--outline"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.7"
+                        aria-hidden="true"
+                      >
+                        <circle cx="12" cy="12" r="9.4" />
+                        <path d="M3.4 12h17.2M12 2.6c2.6 2.6 3.9 5.9 3.9 9.4s-1.3 6.8-3.9 9.4c-2.6-2.6-3.9-5.9-3.9-9.4S9.4 5.2 12 2.6Z" />
+                      </svg>
+                    )}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
 
-        <div class="content">
-          <p class="lead">
-            <span data-copy="zh">你好，我是 {hero.name}，一名独立开发者与 AI 创业者。</span>
-            <span data-copy="en"
-              >Hi, I'm {hero.name}, an independent developer and AI entrepreneur.</span
+          <h1 class="hero__title" id="intro-title">
+            <span class="hero__title-lead">{hero.headline.lead}</span>{' '}<span
+              class="hero__title-accent">{hero.headline.accent}</span
             >
-          </p>
+          </h1>
 
-          <div class="now" data-now aria-label="目前正在进行的事情">
-            <p>
-              <span data-copy="zh">正在做 <span class="tag">拾记</span></span>
-              <span data-copy="en">Currently building <span class="tag">Shiji</span></span>
-            </p>
-            <p>
-              <span data-copy="zh">一个只属于你的记录系统。</span>
-              <span data-copy="en">A personal system for capturing what matters to you.</span>
-            </p>
+          <p class="hero__subtitle">{hero.subheadline}</p>
+
+          <div class="hero__actions">
+            {
+              hero.actions.map((action) => (
+                <a class={`button button--${action.variant}`} href={action.href}>
+                  {action.icon === 'phone' && (
+                    <svg class="button__icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.5 0 1 .4 1 1V20c0 .6-.5 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.5 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.3 0 .7-.3 1l-2.2 2.2Z" />
+                    </svg>
+                  )}
+                  {action.icon === 'dot' && <span class="button__dot" aria-hidden="true" />}
+                  <span>{action.label}</span>
+                </a>
+              ))
+            }
           </div>
-
-          <p>
-            <span data-copy="zh">
-              我也在开发 Flutter
-              插件，把日常开发中反复遇到的小问题整理成更轻量、好用的工具，希望能让构建跨平台应用的过程更顺手一些。
-            </span>
-            <span data-copy="en">
-              I also build Flutter plugins, turning recurring problems from day-to-day development
-              into lightweight, practical tools that make building cross-platform apps feel a little
-              smoother.
-            </span>
-          </p>
-
-          <p>
-            <span data-copy="zh">
-              我喜欢把零散的想法做成真正能用的产品，从设计界面到完成开发，让想法落地是一件很有意思的事情。你可以在这里查看我的<a
-                href="/projects">项目列表</a
-              >。
-            </span>
-            <span data-copy="en">
-              I enjoy turning scattered ideas into products people can actually use, from shaping
-              the interface to shipping the final experience. You can explore my <a href="/projects"
-                >project list</a
-              > here.
-            </span>
-          </p>
-
-          <p>
-            <span data-copy="zh">
-              我也会写一些关于产品、技术和生活的文字。偶尔记录灵光乍现，也收藏那些仍在发生的日常。你可以从<a
-                href="/blog">博客</a
-              >开始阅读。
-            </span>
-            <span data-copy="en">
-              I also write about products, technology, and life—capturing passing ideas and the
-              everyday moments still unfolding. You can start with my <a href="/blog">blog</a>.
-            </span>
-          </p>
-        </div>
+        </section>
 
         <section class="packages" aria-labelledby="packages-title">
           <header class="packages__header">
@@ -448,51 +454,154 @@ const [github, x] = hero.socials
     width: 100%;
   }
 
-  h1 {
-    margin: 0;
-    color: #111;
-    font-size: clamp(3rem, 8vw, 4.5rem);
-    line-height: 1;
-    letter-spacing: -0.045em;
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
-  .content {
-    margin-top: clamp(3rem, 7vw, 4.25rem);
-    color: #5d5d5d;
-    font-size: clamp(1.2rem, 2.8vw, 1.45rem);
-    line-height: 1.82;
+  .hero {
+    padding-top: clamp(0.75rem, 3vw, 2rem);
+    text-align: center;
   }
 
-  html[data-lang='zh'] .content {
-    font-size: clamp(1.12rem, 2.6vw, 1.34rem);
-    line-height: 1.78;
-  }
-
-  .content p {
-    margin: 0 0 1.55rem;
-  }
-
-  .content .lead {
-    margin-bottom: 2rem;
-  }
-
-  .now {
-    margin-bottom: 2.25rem;
-  }
-
-  .now p {
-    margin: 0.15rem 0;
-  }
-
-  .tag {
-    display: inline-flex;
+  .hero__socials {
+    display: flex;
     align-items: center;
-    margin-left: 0.25rem;
-    padding: 0.05em 0.45em;
-    border-radius: 0.35rem;
-    color: #666;
-    background: #ededeb;
-    font-size: 0.92em;
+    justify-content: center;
+    gap: clamp(2.1rem, 6vw, 3.6rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .hero__social {
+    display: inline-flex;
+    width: clamp(1.8rem, 3.4vw, 2.15rem);
+    height: clamp(1.8rem, 3.4vw, 2.15rem);
+    align-items: center;
+    justify-content: center;
+    color: #0d0d0d;
+    text-decoration: none;
+    transition:
+      color 160ms ease,
+      transform 160ms ease;
+  }
+
+  .hero__social:hover {
+    color: #8a8a86;
+    transform: translateY(-2px);
+  }
+
+  .hero__icon {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .hero__icon--outline {
+    fill: none;
+    stroke: currentColor;
+  }
+
+  .hero__title {
+    margin: clamp(1.5rem, 3.6vw, 2.4rem) 0 0;
+    color: #0b0b0b;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.35rem, 7.4vw, 4.9rem);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .hero__title-accent {
+    color: #8b8b87;
+  }
+
+  .hero__subtitle {
+    max-width: 33rem;
+    margin: clamp(1.05rem, 2.6vw, 1.6rem) auto 0;
+    color: #71716e;
+    font-size: clamp(1rem, 2vw, 1.24rem);
+    line-height: 1.62;
+    text-wrap: balance;
+  }
+
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(0.8rem, 1.8vw, 1.15rem);
+    margin-top: clamp(1.75rem, 3.6vw, 2.5rem);
+  }
+
+  .button {
+    display: inline-flex;
+    min-height: clamp(3.2rem, 6vw, 3.6rem);
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.9rem clamp(1.5rem, 3.4vw, 2.15rem);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: clamp(0.98rem, 1.6vw, 1.06rem);
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      color 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      transform 180ms ease;
+  }
+
+  .button__icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    fill: currentColor;
+  }
+
+  .button__dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .button--primary {
+    border-color: #0b0b0b;
+    color: #fff;
+    background: #0b0b0b;
+  }
+
+  .button--primary:hover {
+    border-color: #262626;
+    color: #fff;
+    background: #262626;
+    box-shadow: 0 12px 26px rgb(20 20 18 / 18%);
+    transform: translateY(-1px);
+  }
+
+  .button--ghost {
+    border-color: #e3e3df;
+    color: #131313;
+    background: #fff;
+  }
+
+  .button--ghost:hover {
+    border-color: #c9c9c4;
+    color: #131313;
+    background: #fbfbfa;
+    transform: translateY(-1px);
   }
 
   a {
@@ -713,12 +822,20 @@ const [github, x] = hero.socials
       padding-top: 3rem;
     }
 
-    .content {
-      line-height: 1.76;
-    }
-
     .divider {
       margin-top: 3rem;
+    }
+
+    .hero__title {
+      font-size: clamp(2.05rem, 10.4vw, 2.9rem);
+    }
+
+    .hero__actions {
+      gap: 0.75rem;
+    }
+
+    .button {
+      padding-inline: 1.35rem;
     }
 
     .packages {
@@ -757,6 +874,17 @@ const [github, x] = hero.socials
     }
   }
 
+  @media (max-width: 420px) {
+    .hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+
   html[data-theme='dark'] {
     color: #ededeb;
     background-color: #181817;
@@ -766,18 +894,53 @@ const [github, x] = hero.socials
     background-image: radial-gradient(circle, rgb(255 255 255 / 10%) 1px, transparent 1.2px);
   }
 
-  html[data-theme='dark'] h1 {
+  html[data-theme='dark'] .hero__social {
+    color: #f0f0ec;
+  }
+
+  html[data-theme='dark'] .hero__social:hover {
+    color: #a5a59f;
+  }
+
+  html[data-theme='dark'] .hero__title {
     color: #f4f4f1;
   }
 
-  html[data-theme='dark'] .content,
-  html[data-theme='dark'] footer {
-    color: #b8b8b2;
+  html[data-theme='dark'] .hero__title-accent {
+    color: #86867f;
   }
 
-  html[data-theme='dark'] .tag {
-    color: #cdcdc7;
-    background: #2d2d2a;
+  html[data-theme='dark'] .hero__subtitle {
+    color: #a9a9a3;
+  }
+
+  html[data-theme='dark'] .button--primary {
+    border-color: #f4f4f1;
+    color: #131313;
+    background: #f4f4f1;
+  }
+
+  html[data-theme='dark'] .button--primary:hover {
+    border-color: #fff;
+    color: #131313;
+    background: #fff;
+    box-shadow: 0 12px 26px rgb(0 0 0 / 32%);
+  }
+
+  html[data-theme='dark'] .button--ghost {
+    border-color: #3a3a37;
+    color: #efefeb;
+    background: #20201e;
+  }
+
+  html[data-theme='dark'] .button--ghost:hover {
+    border-color: #4d4d49;
+    color: #fff;
+    background: #262624;
+  }
+
+  html[data-theme='dark'] footer {
+    color: #b8b8b2;
   }
 
   html[data-theme='dark'] a,
@@ -833,6 +996,8 @@ const [github, x] = hero.socials
     :root,
     body,
     .site-nav__inner,
+    .hero__social,
+    .button,
     .package-card {
       transition: none;
     }

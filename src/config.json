@@ -15,6 +15,25 @@
   },
   "hero": {
     "name": "leewei",
+    "headline": {
+      "lead": "Short content builds",
+      "accent": "influence"
+    },
+    "subheadline": "We help individuals and businesses take control of their content, strategy, and consistent execution across every platform",
+    "actions": [
+      {
+        "label": "Book A Call",
+        "href": "/mine",
+        "variant": "primary",
+        "icon": "phone"
+      },
+      {
+        "label": "See Case Studies",
+        "href": "/projects",
+        "variant": "ghost",
+        "icon": "dot"
+      }
+    ],
     "bio": "独立开发者·AI创业者",
     "description": "在做「拾记」\n 一个只属于你的记录系统",
     "socials": [
