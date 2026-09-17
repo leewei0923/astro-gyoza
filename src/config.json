@@ -105,6 +105,33 @@
   "sponsor": {
     "wechat": ""
   },
+  "flutterPackages": {
+    "eyebrow": "FLUTTER PACKAGES",
+    "title": "Tools built for Flutter developers.",
+    "items": [
+      {
+        "step": "01",
+        "title": "Package 01",
+        "description": "Replace this with a short description of your first Flutter package.",
+        "link": "",
+        "icon": "display"
+      },
+      {
+        "step": "02",
+        "title": "Package 02",
+        "description": "Replace this with a short description of your second Flutter package.",
+        "link": "",
+        "icon": "workflow"
+      },
+      {
+        "step": "03",
+        "title": "Package 03",
+        "description": "Replace this with a short description of your third Flutter package.",
+        "link": "",
+        "icon": "notes"
+      }
+    ]
+  },
   "analytics": {
     "enable": false,
     "google": {

@@ -1,5 +1,5 @@
 ---
-import { author, hero, site } from '@/config.json'
+import { author, flutterPackages, hero, site } from '@/config.json'
 
 const [github, x] = hero.socials
 ---
@@ -98,6 +98,117 @@ const [github, x] = hero.socials
             </span>
           </p>
         </div>
+
+        <section class="packages" aria-labelledby="packages-title">
+          <header class="packages__header">
+            <p class="packages__eyebrow">{flutterPackages.eyebrow}</p>
+            <h2 id="packages-title">{flutterPackages.title}</h2>
+          </header>
+
+          <ul class="packages__grid">
+            {
+              flutterPackages.items.map((item) => (
+                <li class="package-item">
+                  <a
+                    class="package-card"
+                    href={item.link || undefined}
+                    target={item.link ? '_blank' : undefined}
+                    rel={item.link ? 'noopener noreferrer external' : undefined}
+                  >
+                    <span class="package-card__step">STEP {item.step}</span>
+
+                    <span class="package-card__icon" aria-hidden="true">
+                      {item.icon === 'display' && (
+                        <svg
+                          class="package-icon"
+                          viewBox="0 0 144 104"
+                          role="presentation"
+                          focusable="false"
+                        >
+                          <g
+                            class="pixel pixel--magenta"
+                            fill="none"
+                            stroke-width="6"
+                            stroke-linecap="square"
+                            stroke-linejoin="miter"
+                          >
+                            <path d="M30 28h78v42H30z" />
+                            <path d="M38 82h62" />
+                            <path d="M52 82v-7h34v7" />
+                            <path d="M45 18l13 10M99 18l-13 10" />
+                          </g>
+                          <g class="pixel pixel--magenta">
+                            <path d="M46 40h30v7H46z" opacity=".28" />
+                            <path d="M116 36h7v7h-7zM116 49h7v7h-7zM116 62h7v7h-7zM102 62h7v7h-7z" />
+                          </g>
+                        </svg>
+                      )}
+
+                      {item.icon === 'workflow' && (
+                        <svg
+                          class="package-icon"
+                          viewBox="0 0 150 118"
+                          role="presentation"
+                          focusable="false"
+                        >
+                          <g
+                            class="pixel pixel--orange"
+                            fill="none"
+                            stroke-width="6"
+                            stroke-linecap="square"
+                            stroke-linejoin="miter"
+                          >
+                            <path d="M22 20h34v8h8v28h-8v8H22v-8h-8V28h8z" />
+                            <path d="M64 42h16V28h8" />
+                            <path d="M64 54h16v32h8" />
+                            <path d="M92 20h34v8h8v28h-8v8H92v-8h-8V28h8z" />
+                            <path d="M92 72h34v8h8v24h-8v8H92v-8h-8V80h8z" />
+                          </g>
+                        </svg>
+                      )}
+
+                      {item.icon === 'notes' && (
+                        <svg
+                          class="package-icon"
+                          viewBox="0 0 150 112"
+                          role="presentation"
+                          focusable="false"
+                        >
+                          <g
+                            class="pixel pixel--magenta"
+                            fill="none"
+                            stroke-width="6"
+                            stroke-linecap="square"
+                            stroke-linejoin="miter"
+                          >
+                            <path d="M20 38h58v42H40l-12 12V80H20z" />
+                            <path d="M34 52h28M34 64h20" />
+                          </g>
+                          <g
+                            class="pixel pixel--orange"
+                            fill="none"
+                            stroke-width="6"
+                            stroke-linecap="square"
+                            stroke-linejoin="miter"
+                          >
+                            <path d="M70 22h56v40H98l-12 12V62H70z" />
+                            <path d="M84 36h28M84 48h20" />
+                            <path d="M112 10h18v8h-8v8h-8v-8h-8v-8z" fill="currentColor" />
+                          </g>
+                        </svg>
+                      )}
+                    </span>
+
+                    <div class="package-card__body">
+                      <h3 class="package-card__title">{item.title}</h3>
+                      <p class="package-card__description">{item.description}</p>
+                    </div>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
 
         <div class="divider" aria-hidden="true"></div>
 
@@ -435,6 +546,163 @@ const [github, x] = hero.socials
     color: #262626;
   }
 
+  .packages {
+    margin-top: clamp(4.75rem, 10vw, 7.5rem);
+  }
+
+  .packages__header {
+    max-width: 42rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .packages__eyebrow {
+    margin: 0;
+    color: #888884;
+    font-size: 0.72rem;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+  }
+
+  .packages__title {
+    margin: 0.85rem 0 0;
+    color: #111;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.2rem, 6.4vw, 3.65rem);
+    font-weight: 400;
+    line-height: 1.03;
+    letter-spacing: -0.035em;
+  }
+
+  .packages__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.5rem);
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .package-item {
+    min-width: 0;
+  }
+
+  .package-card {
+    display: flex;
+    min-height: clamp(24rem, 37vw, 29rem);
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(1.35rem, 2.8vw, 2rem);
+    border: 1px solid #ececea;
+    border-radius: 1.4rem;
+    color: #242424;
+    background: #f7f7f6;
+    text-align: center;
+    text-decoration: none;
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      background-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  a.package-card[href]:hover {
+    border-color: #d6d6d2;
+    background: #f4f4f2;
+    box-shadow: 0 12px 30px rgb(20 20 18 / 7%);
+    transform: translateY(-4px);
+  }
+
+  .package-card:focus-visible {
+    outline: 2px solid #3467d6;
+    outline-offset: 4px;
+  }
+
+  .package-card__step {
+    display: inline-flex;
+    min-height: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid rgb(35 35 35 / 3%);
+    border-radius: 0.5rem;
+    color: #666662;
+    background: #fff;
+    box-shadow: 0 1px 2px rgb(20 20 18 / 4%);
+    font-size: 0.73rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.08em;
+  }
+
+  .package-card__icon {
+    --pixel-magenta: #f22bcf;
+    --pixel-orange: #f4511e;
+    display: grid;
+    width: 100%;
+    min-height: 9rem;
+    flex: 1;
+    place-items: center;
+    padding: 2.75rem 1rem 2.5rem;
+  }
+
+  .package-icon {
+    width: min(100%, 7.75rem);
+    height: auto;
+    overflow: visible;
+  }
+
+  .pixel--magenta {
+    fill: var(--pixel-magenta);
+    stroke: var(--pixel-magenta);
+  }
+
+  .pixel--orange {
+    fill: var(--pixel-orange);
+    stroke: var(--pixel-orange);
+  }
+
+  .package-card__body {
+    display: block;
+    margin-top: auto;
+  }
+
+  .package-card__title {
+    margin: 0;
+    color: #111;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.35rem, 2.7vw, 1.72rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+  }
+
+  .package-card__description {
+    max-width: 20rem;
+    margin: 0.85rem auto 0;
+    color: #777773;
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 900px) {
+    .packages__grid {
+      max-width: 32rem;
+      grid-template-columns: 1fr;
+      margin-inline: auto;
+    }
+
+    .package-card {
+      min-height: 22rem;
+    }
+
+    .package-card__icon {
+      min-height: 8rem;
+      flex: none;
+      padding: 2.25rem 1rem 2rem;
+    }
+  }
+
   @media (max-width: 560px) {
     body {
       background-size: 20px 20px;
@@ -451,6 +719,41 @@ const [github, x] = hero.socials
 
     .divider {
       margin-top: 3rem;
+    }
+
+    .packages {
+      margin-top: 4.25rem;
+    }
+
+    .packages__title {
+      font-size: clamp(2rem, 10vw, 2.75rem);
+    }
+
+    .packages__grid {
+      margin-top: 2.25rem;
+    }
+
+    .package-card {
+      min-height: 20rem;
+      padding: 1.25rem;
+      border-radius: 1.15rem;
+    }
+
+    .package-card__icon {
+      min-height: 7rem;
+      padding: 1.9rem 1rem 1.75rem;
+    }
+
+    .package-icon {
+      width: 6.6rem;
+    }
+
+    .package-card__title {
+      font-size: 1.35rem;
+    }
+
+    .package-card__description {
+      font-size: 0.9rem;
     }
   }
 
@@ -491,11 +794,46 @@ const [github, x] = hero.socials
     background: #3c3c39;
   }
 
+  html[data-theme='dark'] .packages__eyebrow,
+  html[data-theme='dark'] .package-card__description {
+    color: #a9a9a3;
+  }
+
+  html[data-theme='dark'] .packages__title,
+  html[data-theme='dark'] .package-card__title {
+    color: #f4f4f1;
+  }
+
+  html[data-theme='dark'] .package-card {
+    border-color: #333330;
+    color: #ededeb;
+    background: #20201e;
+  }
+
+  html[data-theme='dark'] a.package-card[href]:hover {
+    border-color: #4a4a46;
+    background: #252522;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 20%);
+  }
+
+  html[data-theme='dark'] .package-card__step {
+    border-color: rgb(255 255 255 / 4%);
+    color: #cacac4;
+    background: #2b2b28;
+    box-shadow: none;
+  }
+
+  html[data-theme='dark'] .package-card__icon {
+    --pixel-magenta: #ff65df;
+    --pixel-orange: #ff7a4d;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     a,
     :root,
     body,
-    .site-nav__inner {
+    .site-nav__inner,
+    .package-card {
       transition: none;
     }
   }
