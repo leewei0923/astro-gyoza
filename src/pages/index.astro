@@ -5,13 +5,13 @@ const [github, x] = hero.socials
 ---
 
 <!doctype html>
-<html lang={site.lang}>
+<html lang="zh-CN" data-lang="zh" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={site.description} />
     <meta name="author" content={author.name} />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="light" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={site.title} />
     <meta property="og:description" content={site.description} />
@@ -20,89 +20,93 @@ const [github, x] = hero.socials
     <link rel="icon" href={site.favicon} />
     <link rel="apple-touch-icon" href={site.appleTouchIcon} />
     <title>{site.title}</title>
-    <script is:inline>
-      const savedLanguage = localStorage.getItem('home-language')
-      const initialLanguage =
-        savedLanguage === 'zh' || savedLanguage === 'en'
-          ? savedLanguage
-          : navigator.language.toLowerCase().startsWith('zh')
-            ? 'zh'
-            : 'en'
-
-      document.documentElement.dataset.lang = initialLanguage
-      document.documentElement.lang = initialLanguage === 'zh' ? 'zh-CN' : 'en'
-    </script>
   </head>
   <body>
+    <header class="site-nav" data-site-nav>
+      <div class="site-nav__inner">
+        <a class="wordmark" href="/" aria-label="LEEWEI0923 首页">
+          <span class="wordmark__text">LEEWEI0923</span>
+          <span class="wordmark__dot" aria-hidden="true"></span>
+        </a>
+        <nav class="site-nav__menu" aria-label="主导航">
+          <a class="site-nav__link is-active" href="/" aria-current="page">Home</a>
+          <a class="site-nav__link" href="/blog">Blog</a>
+          <a class="site-nav__link" href="/projects">Projects</a>
+        </nav>
+        <span class="site-nav__spacer" aria-hidden="true"></span>
+      </div>
+    </header>
+
     <main>
-      <section class="intro" aria-labelledby="intro-title">
-        <button class="language-switch" type="button" aria-label="Switch to English">
-          <span data-switch-label="zh">EN</span>
-          <span data-switch-label="en">中</span>
-        </button>
+      <article aria-labelledby="intro-title" data-language-content>
+        <h1 id="intro-title">{hero.name}</h1>
 
-        <div class="identity" data-language-section>
-          <img
-            class="avatar"
-            src={author.avatar}
-            alt={`${author.name} 的头像`}
-            width="64"
-            height="64"
-          />
-          <div>
-            <span class="eyebrow">
-              <span data-copy="zh">满河星 · SINCE 2024</span>
-              <span data-copy="en">MILKY RIVER · SINCE 2024</span>
-            </span>
-            <h1 id="intro-title">
-              <span data-copy="zh">你好，我是 {hero.name}。</span>
-              <span data-copy="en">Hi, I'm {hero.name}.</span>
-            </h1>
-          </div>
-        </div>
-
-        <div class="copy" data-language-section>
+        <div class="content">
           <p class="lead">
-            <span data-copy="zh">{hero.bio}</span>
-            <span data-copy="en">Indie developer · AI founder</span>
+            <span data-copy="zh">你好，我是 {hero.name}，一名独立开发者与 AI 创业者。</span>
+            <span data-copy="en"
+              >Hi, I'm {hero.name}, an independent developer and AI entrepreneur.</span
+            >
           </p>
+
+          <div class="now" data-now aria-label="目前正在进行的事情">
+            <p>
+              <span data-copy="zh">正在做 <span class="tag">拾记</span></span>
+              <span data-copy="en">Currently building <span class="tag">Shiji</span></span>
+            </p>
+            <p>
+              <span data-copy="zh">一个只属于你的记录系统。</span>
+              <span data-copy="en">A personal system for capturing what matters to you.</span>
+            </p>
+          </div>
+
           <p>
             <span data-copy="zh">
-              我喜欢把零散的想法做成真正能用的产品。现在正在做「拾记」，一个只属于你的记录系统。
+              我也在开发 Flutter
+              插件，把日常开发中反复遇到的小问题整理成更轻量、好用的工具，希望能让构建跨平台应用的过程更顺手一些。
             </span>
             <span data-copy="en">
-              I enjoy turning scattered ideas into products people can actually use. I'm currently
-              building Shiji, a personal system for capturing what matters to you.
+              I also build Flutter plugins, turning recurring problems from day-to-day development
+              into lightweight, practical tools that make building cross-platform apps feel a little
+              smoother.
             </span>
           </p>
+
           <p>
-            <span data-copy="zh">这里也存放我的文字、项目，以及一些仍在发生的生活。</span>
+            <span data-copy="zh">
+              我喜欢把零散的想法做成真正能用的产品，从设计界面到完成开发，让想法落地是一件很有意思的事情。你可以在这里查看我的<a
+                href="/projects">项目列表</a
+              >。
+            </span>
             <span data-copy="en">
-              This is also where I keep my writing, projects, and fragments of life still in
-              progress.
+              I enjoy turning scattered ideas into products people can actually use, from shaping
+              the interface to shipping the final experience. You can explore my <a href="/projects"
+                >project list</a
+              > here.
+            </span>
+          </p>
+
+          <p>
+            <span data-copy="zh">
+              我也会写一些关于产品、技术和生活的文字。偶尔记录灵光乍现，也收藏那些仍在发生的日常。你可以从<a
+                href="/blog">博客</a
+              >开始阅读。
+            </span>
+            <span data-copy="en">
+              I also write about products, technology, and life—capturing passing ideas and the
+              everyday moments still unfolding. You can start with my <a href="/blog">blog</a>.
             </span>
           </p>
         </div>
 
-        <div class="entrances" data-entrances data-language-section aria-label="网站入口">
-          <a href="/blog">
-            <span data-copy="zh">读点文字</span>
-            <span data-copy="en">Read the blog</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-          <a href="/projects">
-            <span data-copy="zh">看看项目</span>
-            <span data-copy="en">View projects</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        </div>
+        <div class="divider" aria-hidden="true"></div>
 
-        <footer data-language-section>
-          <span>
-            <span data-copy="zh">在别处找到我</span>
+        <footer>
+          <p>
+            <span data-copy="zh">在其他地方找到我</span>
             <span data-copy="en">Find me elsewhere</span>
-          </span>
-          <div class="socials">
+          </p>
+          <nav data-socials aria-label="社交媒体">
             {
               github && (
                 <a href={github.url} rel="me noreferrer">
@@ -113,105 +117,33 @@ const [github, x] = hero.socials
             {
               x && (
                 <a href={x.url} rel="me noreferrer">
-                  X
+                  X / Twitter
                 </a>
               )
             }
-          </div>
+          </nav>
         </footer>
-      </section>
+      </article>
     </main>
 
     <script is:inline>
-      const languageSwitch = document.querySelector('.language-switch')
-      const animatedSections = [...document.querySelectorAll('[data-language-section]')]
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-      let isSwitchingLanguage = false
-
-      const updateSwitch = () => {
-        const language = document.documentElement.dataset.lang || 'zh'
-        languageSwitch?.setAttribute(
-          'aria-label',
-          language === 'zh' ? 'Switch to English' : '切换到中文',
-        )
-        document
-          .querySelector('[data-entrances]')
-          ?.setAttribute('aria-label', language === 'zh' ? '网站入口' : 'Site links')
+      const siteNav = document.querySelector('[data-site-nav]')
+      const updateNav = () => {
+        siteNav?.toggleAttribute('data-scrolled', window.scrollY > 16)
       }
 
-      const setLanguage = (language) => {
-        document.documentElement.dataset.lang = language
-        document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en'
-        localStorage.setItem('home-language', language)
-        updateSwitch()
+      let isFramePending = false
+      const handleScroll = () => {
+        if (isFramePending) return
+        isFramePending = true
+        requestAnimationFrame(() => {
+          isFramePending = false
+          updateNav()
+        })
       }
 
-      languageSwitch?.addEventListener('click', async () => {
-        if (isSwitchingLanguage) return
-
-        const nextLanguage = document.documentElement.dataset.lang === 'zh' ? 'en' : 'zh'
-
-        if (reducedMotion.matches) {
-          setLanguage(nextLanguage)
-          return
-        }
-
-        isSwitchingLanguage = true
-        languageSwitch.disabled = true
-
-        const buttonAnimation = languageSwitch.animate(
-          [
-            { transform: 'rotate(0deg) scale(1)' },
-            { transform: 'rotate(90deg) scale(0.88)', offset: 0.45 },
-            { transform: 'rotate(180deg) scale(1)' },
-          ],
-          { duration: 520, easing: 'cubic-bezier(.22, 1, .36, 1)' },
-        )
-
-        const exitAnimations = animatedSections.map((section, index) =>
-          section.animate(
-            [
-              { opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' },
-              { opacity: 0, transform: 'translateY(-7px)', filter: 'blur(3px)' },
-            ],
-            {
-              duration: 170,
-              delay: index * 18,
-              easing: 'cubic-bezier(.4, 0, 1, 1)',
-              fill: 'forwards',
-            },
-          ),
-        )
-
-        await Promise.all(exitAnimations.map((animation) => animation.finished))
-        setLanguage(nextLanguage)
-
-        const enterAnimations = animatedSections.map((section, index) =>
-          section.animate(
-            [
-              { opacity: 0, transform: 'translateY(9px)', filter: 'blur(3px)' },
-              { opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' },
-            ],
-            {
-              duration: 360,
-              delay: index * 34,
-              easing: 'cubic-bezier(.22, 1, .36, 1)',
-              fill: 'forwards',
-            },
-          ),
-        )
-
-        await Promise.all([
-          buttonAnimation.finished,
-          ...enterAnimations.map((animation) => animation.finished),
-        ])
-        const completedAnimations = [...exitAnimations, ...enterAnimations]
-        completedAnimations.forEach((animation) => animation.cancel())
-        languageSwitch.disabled = false
-        isSwitchingLanguage = false
-      })
-
-      updateSwitch()
+      updateNav()
+      window.addEventListener('scroll', handleScroll, { passive: true })
     </script>
   </body>
 </html>
@@ -234,10 +166,21 @@ const [github, x] = hero.socials
   }
 
   :root {
-    color-scheme: light dark;
+    color-scheme: light;
     font-family: 'Atkinson', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
-    color: #252522;
-    background: #f8f7f3;
+    color: #242424;
+    background-color: #fbfbfa;
+    transition:
+      color 220ms ease,
+      background-color 220ms ease;
+  }
+
+  html[data-theme='light'] {
+    color-scheme: light;
+  }
+
+  html[data-theme='dark'] {
+    color-scheme: dark;
   }
 
   * {
@@ -245,287 +188,315 @@ const [github, x] = hero.socials
   }
 
   body {
-    position: relative;
     min-width: 320px;
     min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
-  }
-
-  body::before {
-    position: fixed;
-    z-index: -1;
-    inset: 0;
-    background: url('/botanical-bg.png') center / cover no-repeat;
-    content: '';
-    opacity: 0.2;
-    pointer-events: none;
+    background-image: radial-gradient(circle, rgb(35 35 35 / 11%) 1px, transparent 1.2px);
+    background-size: 24px 24px;
+    transition:
+      color 220ms ease,
+      background-color 220ms ease;
   }
 
   main {
-    width: min(100% - 3rem, 43rem);
-    min-height: 100vh;
-    min-height: 100dvh;
+    position: relative;
+    width: min(100% - 3rem, 54rem);
     margin: 0 auto;
+    padding: clamp(3.5rem, 8vw, 6rem) 0 4rem;
+  }
+
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .site-nav__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: min(100% - 2.5rem, 1100px);
+    min-height: 64px;
+    margin: 0 auto;
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 220ms ease,
+      border-color 220ms ease,
+      backdrop-filter 220ms ease;
+  }
+
+  .site-nav[data-scrolled] .site-nav__inner {
+    border-bottom-color: rgb(35 35 35 / 10%);
+    background-color: rgb(251 251 250 / 78%);
+    backdrop-filter: blur(12px) saturate(150%);
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    justify-self: start;
+    color: #111;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .wordmark:hover {
+    color: #111;
+    text-decoration: none;
+  }
+
+  .wordmark__dot {
+    width: 0.32em;
+    height: 0.32em;
+    margin-left: 0.06em;
+    border-radius: 50%;
+    background: #f55555;
+  }
+
+  .site-nav__menu {
     display: flex;
     align-items: center;
-    padding: 5rem 0;
+    flex-wrap: nowrap;
+    column-gap: 2rem;
+    justify-self: center;
   }
 
-  .intro {
+  .site-nav__link {
     position: relative;
-    width: 100%;
+    padding-bottom: 2px;
+    color: #5d5d5d;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 160ms ease;
   }
 
-  [data-copy='en'],
-  [data-switch-label='en'] {
+  .site-nav__link:hover {
+    color: #111;
+    text-decoration: none;
+  }
+
+  .site-nav__link.is-active {
+    color: #111;
+  }
+
+  .site-nav__link.is-active::after {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background: #111;
+    content: '';
+  }
+
+  .site-nav__spacer {
+    justify-self: end;
+  }
+
+  @media (max-width: 640px) {
+    .site-nav__inner {
+      grid-template-columns: 1fr;
+      row-gap: 0.6rem;
+      padding: 0.75rem 0 0.7rem;
+    }
+
+    .site-nav__spacer {
+      display: none;
+    }
+
+    .wordmark {
+      justify-self: start;
+      font-size: 0.95rem;
+    }
+
+    .site-nav__menu {
+      justify-self: center;
+      column-gap: 1.25rem;
+    }
+  }
+
+  [data-copy='en'] {
     display: none;
   }
 
-  html[data-lang='en'] [data-copy='zh'],
-  html[data-lang='en'] [data-switch-label='zh'] {
+  html[data-lang='en'] [data-copy='zh'] {
     display: none;
   }
 
-  html[data-lang='en'] [data-copy='en'],
-  html[data-lang='en'] [data-switch-label='en'] {
+  html[data-lang='en'] [data-copy='en'] {
     display: inline;
   }
 
-  .language-switch {
-    position: absolute;
-    top: -3.25rem;
-    right: 0;
-    width: 2.5rem;
-    height: 2.5rem;
-    padding: 0;
-    border: 1px solid #d9d7cf;
-    border-radius: 50%;
-    color: #77766f;
-    background: rgb(248 247 243 / 72%);
-    font: inherit;
-    font-size: 0.75rem;
-    cursor: pointer;
-    backdrop-filter: blur(8px);
-    transition:
-      color 160ms ease,
-      border-color 160ms ease,
-      transform 160ms ease;
-  }
-
-  .language-switch:hover {
-    border-color: #77766f;
-    color: #252522;
-    transform: rotate(6deg);
-  }
-
-  .language-switch:disabled {
-    cursor: default;
-  }
-
-  [data-language-section] {
-    will-change: transform, opacity, filter;
-  }
-
-  .identity {
-    display: flex;
-    align-items: center;
-    gap: 1.15rem;
-  }
-
-  .avatar {
-    width: 4rem;
-    height: 4rem;
-    flex: none;
-    border-radius: 50%;
-    object-fit: cover;
-    filter: saturate(0.84);
-  }
-
-  .eyebrow {
-    display: block;
-    margin-bottom: 0.35rem;
-    color: #88877f;
-    font-size: 0.72rem;
-    line-height: 1.2;
-    letter-spacing: 0.14em;
+  article {
+    width: 100%;
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(2rem, 7vw, 3rem);
-    line-height: 1.08;
-    letter-spacing: -0.04em;
+    color: #111;
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
   }
 
-  .copy {
-    max-width: 38rem;
-    margin-top: 3rem;
-    color: #5e5d57;
-    font-size: 1.06rem;
-    line-height: 1.9;
+  .content {
+    margin-top: clamp(3rem, 7vw, 4.25rem);
+    color: #5d5d5d;
+    font-size: clamp(1.2rem, 2.8vw, 1.45rem);
+    line-height: 1.82;
   }
 
-  .copy p {
-    margin: 0 0 0.9rem;
+  html[data-lang='zh'] .content {
+    font-size: clamp(1.12rem, 2.6vw, 1.34rem);
+    line-height: 1.78;
   }
 
-  .copy .lead {
-    margin-bottom: 1.35rem;
-    color: #252522;
-    font-size: 1.18rem;
+  .content p {
+    margin: 0 0 1.55rem;
   }
 
-  .entrances {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-    margin-top: 2.75rem;
+  .content .lead {
+    margin-bottom: 2rem;
   }
 
-  .entrances a {
-    display: flex;
+  .now {
+    margin-bottom: 2.25rem;
+  }
+
+  .now p {
+    margin: 0.15rem 0;
+  }
+
+  .tag {
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
-    border-top: 1px solid #d9d7cf;
-    color: inherit;
-    font-size: 0.96rem;
-    text-decoration: none;
-    transition: border-color 160ms ease;
+    margin-left: 0.25rem;
+    padding: 0.05em 0.45em;
+    border-radius: 0.35rem;
+    color: #666;
+    background: #ededeb;
+    font-size: 0.92em;
   }
 
-  .entrances a span:last-child {
-    color: #8b8981;
-    transition: transform 160ms ease;
-  }
-
-  .entrances a:hover {
-    border-color: #252522;
-  }
-
-  .entrances a:hover span:last-child {
-    transform: translate(2px, -2px);
-  }
-
-  footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 4.5rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid #e4e2dc;
-    color: #929088;
-    font-size: 0.78rem;
-  }
-
-  .socials {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .socials a {
-    color: inherit;
+  a {
+    color: #171717;
+    text-decoration-color: #a9a9a6;
+    text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
+    transition:
+      color 160ms ease,
+      text-decoration-color 160ms ease;
+  }
+
+  a:hover {
+    color: #000;
+    text-decoration-color: currentColor;
   }
 
   a:focus-visible {
+    border-radius: 0.15rem;
     outline: 2px solid #3467d6;
     outline-offset: 4px;
   }
 
+  .divider {
+    width: 4rem;
+    height: 1px;
+    margin: 3.75rem auto 2.75rem;
+    background: #d9d9d6;
+  }
+
+  footer {
+    color: #5d5d5d;
+    font-size: 1.18rem;
+  }
+
+  html[data-lang='zh'] footer {
+    font-size: 1.1rem;
+  }
+
+  footer > p {
+    margin: 0 0 1rem;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.1rem;
+  }
+
+  nav a {
+    color: #262626;
+  }
+
   @media (max-width: 560px) {
+    body {
+      background-size: 20px 20px;
+    }
+
     main {
-      width: min(100% - 2.5rem, 43rem);
-      align-items: flex-start;
-      padding: 4rem 0 3rem;
+      width: min(100% - 2.5rem, 54rem);
+      padding-top: 3rem;
     }
 
-    .identity {
-      align-items: flex-start;
-      flex-direction: column;
+    .content {
+      line-height: 1.76;
     }
 
-    .language-switch {
-      top: -1rem;
-    }
-
-    .copy {
-      margin-top: 2.4rem;
-      font-size: 1rem;
-      line-height: 1.82;
-    }
-
-    .entrances {
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
-
-    footer {
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 0.8rem;
-      margin-top: 3.5rem;
+    .divider {
+      margin-top: 3rem;
     }
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      color: #eeeee9;
-      background: #171715;
-    }
+  html[data-theme='dark'] {
+    color: #ededeb;
+    background-color: #181817;
+  }
 
-    body::before {
-      opacity: 0.12;
-      filter: invert(1);
-    }
+  html[data-theme='dark'] body {
+    background-image: radial-gradient(circle, rgb(255 255 255 / 10%) 1px, transparent 1.2px);
+  }
 
-    .language-switch {
-      border-color: #3d3c38;
-      color: #aaa9a2;
-      background: rgb(23 23 21 / 72%);
-    }
+  html[data-theme='dark'] h1 {
+    color: #f4f4f1;
+  }
 
-    .language-switch:hover {
-      border-color: #a9a8a1;
-      color: #eeeee9;
-    }
+  html[data-theme='dark'] .content,
+  html[data-theme='dark'] footer {
+    color: #b8b8b2;
+  }
 
-    .eyebrow,
-    footer {
-      color: #8e8d86;
-    }
+  html[data-theme='dark'] .tag {
+    color: #cdcdc7;
+    background: #2d2d2a;
+  }
 
-    .copy {
-      color: #b6b5ae;
-    }
+  html[data-theme='dark'] a,
+  html[data-theme='dark'] nav a {
+    color: #efefeb;
+    text-decoration-color: #686864;
+  }
 
-    .copy .lead {
-      color: #eeeee9;
-    }
+  html[data-theme='dark'] a:hover {
+    color: #fff;
+  }
 
-    .entrances a {
-      border-color: #3d3c38;
-    }
-
-    .entrances a:hover {
-      border-color: #a9a8a1;
-    }
-
-    footer {
-      border-color: #33322f;
-    }
+  html[data-theme='dark'] .divider {
+    background: #3c3c39;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .entrances a,
-    .entrances a span:last-child,
-    .language-switch {
+    a,
+    :root,
+    body,
+    .site-nav__inner {
       transition: none;
-    }
-
-    [data-language-section] {
-      will-change: auto;
     }
   }
 </style>
