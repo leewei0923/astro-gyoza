@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 132" fill="none">
+  <title>Huahua Motion</title>
+  <defs>
+    <linearGradient id="motion-gradient" x1="35" y1="91" x2="143" y2="35" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF2BCB"/>
+      <stop offset="1" stop-color="#F4511E"/>
+    </linearGradient>
+    <filter id="motion-shadow" x="25" y="17" width="136" height="106" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#E3495A" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <g filter="url(#motion-shadow)">
+    <path d="M36 88c22 0 20-48 46-48 24 0 19 50 43 50 11 0 18-8 20-19" stroke="url(#motion-gradient)" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="36" cy="88" r="12" fill="#FF2BCB"/>
+    <circle cx="82" cy="40" r="10" fill="#CE32E9"/>
+    <circle cx="125" cy="90" r="11" fill="#F4511E"/>
+    <path d="m145 54 4 11 11 4-11 4-4 11-4-11-11-4 11-4 4-11Z" fill="#F4511E"/>
+  </g>
+  <path d="M33 112h115" stroke="#E8E8E4" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 10"/>
+</svg>

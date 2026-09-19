@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 132" fill="none">
+  <title>Card Deck View</title>
+  <defs>
+    <linearGradient id="deck-gradient" x1="42" y1="21" x2="139" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF7A1A"/>
+      <stop offset="1" stop-color="#F0441E"/>
+    </linearGradient>
+    <filter id="deck-shadow" x="24" y="8" width="139" height="122" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="7" stdDeviation="5" flood-color="#D94018" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <g filter="url(#deck-shadow)">
+    <rect x="40" y="31" width="75" height="82" rx="12" transform="rotate(-12 40 31)" fill="#FFF" stroke="#FF8A1F" stroke-width="6"/>
+    <rect x="67" y="22" width="75" height="88" rx="12" transform="rotate(8 67 22)" fill="#FFF" stroke="url(#deck-gradient)" stroke-width="6"/>
+    <path d="m91 46 9-7 7 9-9 7-7-9Zm17 25 9-7 7 9-9 7-7-9Z" fill="#F4511E"/>
+    <path d="M85 87h35" stroke="#FF7A1A" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <path d="m33 92-11-2 6-9" stroke="#F4511E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M27 87c2 15 14 26 29 28" stroke="#F4511E" stroke-width="5" stroke-linecap="round"/>
+</svg>

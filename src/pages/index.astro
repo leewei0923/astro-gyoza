@@ -1,7 +1,7 @@
 ---
-import { author, flutterPackages, hero, site } from '@/config.json'
+import { author, flutterPackages, footer, hero, site } from '@/config.json'
 
-const [github, x] = hero.socials
+const thisYear = new Date().getFullYear()
 ---
 
 <!doctype html>
@@ -107,8 +107,18 @@ const [github, x] = hero.socials
 
         <section class="packages" aria-labelledby="packages-title">
           <header class="packages__header">
-            <p class="packages__eyebrow">{flutterPackages.eyebrow}</p>
-            <h2 id="packages-title">{flutterPackages.title}</h2>
+            <a
+              class="packages__link"
+              href={flutterPackages.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <p class="packages__eyebrow">
+                {flutterPackages.eyebrow}
+                <span class="packages__eyebrow-arrow" aria-hidden="true">↗</span>
+              </p>
+              <h2 id="packages-title">{flutterPackages.title}</h2>
+            </a>
           </header>
 
           <ul class="packages__grid">
@@ -120,94 +130,28 @@ const [github, x] = hero.socials
                     href={item.link || undefined}
                     target={item.link ? '_blank' : undefined}
                     rel={item.link ? 'noopener noreferrer external' : undefined}
+                    aria-label={
+                      item.link
+                        ? `View ${item.title} on pub.dev (opens in a new tab)`
+                        : undefined
+                    }
                   >
                     <span class="package-card__step">STEP {item.step}</span>
 
                     <span class="package-card__icon" aria-hidden="true">
-                      {item.icon === 'display' && (
-                        <svg
-                          class="package-icon"
-                          viewBox="0 0 144 104"
-                          role="presentation"
-                          focusable="false"
-                        >
-                          <g
-                            class="pixel pixel--magenta"
-                            fill="none"
-                            stroke-width="6"
-                            stroke-linecap="square"
-                            stroke-linejoin="miter"
-                          >
-                            <path d="M30 28h78v42H30z" />
-                            <path d="M38 82h62" />
-                            <path d="M52 82v-7h34v7" />
-                            <path d="M45 18l13 10M99 18l-13 10" />
-                          </g>
-                          <g class="pixel pixel--magenta">
-                            <path d="M46 40h30v7H46z" opacity=".28" />
-                            <path d="M116 36h7v7h-7zM116 49h7v7h-7zM116 62h7v7h-7zM102 62h7v7h-7z" />
-                          </g>
-                        </svg>
-                      )}
-
-                      {item.icon === 'workflow' && (
-                        <svg
-                          class="package-icon"
-                          viewBox="0 0 150 118"
-                          role="presentation"
-                          focusable="false"
-                        >
-                          <g
-                            class="pixel pixel--orange"
-                            fill="none"
-                            stroke-width="6"
-                            stroke-linecap="square"
-                            stroke-linejoin="miter"
-                          >
-                            <path d="M22 20h34v8h8v28h-8v8H22v-8h-8V28h8z" />
-                            <path d="M64 42h16V28h8" />
-                            <path d="M64 54h16v32h8" />
-                            <path d="M92 20h34v8h8v28h-8v8H92v-8h-8V28h8z" />
-                            <path d="M92 72h34v8h8v24h-8v8H92v-8h-8V80h8z" />
-                          </g>
-                        </svg>
-                      )}
-
-                      {item.icon === 'notes' && (
-                        <svg
-                          class="package-icon"
-                          viewBox="0 0 150 112"
-                          role="presentation"
-                          focusable="false"
-                        >
-                          <g
-                            class="pixel pixel--magenta"
-                            fill="none"
-                            stroke-width="6"
-                            stroke-linecap="square"
-                            stroke-linejoin="miter"
-                          >
-                            <path d="M20 38h58v42H40l-12 12V80H20z" />
-                            <path d="M34 52h28M34 64h20" />
-                          </g>
-                          <g
-                            class="pixel pixel--orange"
-                            fill="none"
-                            stroke-width="6"
-                            stroke-linecap="square"
-                            stroke-linejoin="miter"
-                          >
-                            <path d="M70 22h56v40H98l-12 12V62H70z" />
-                            <path d="M84 36h28M84 48h20" />
-                            <path d="M112 10h18v8h-8v8h-8v-8h-8v-8z" fill="currentColor" />
-                          </g>
-                        </svg>
-                      )}
+                      <img class="package-icon" src={item.image} alt="" loading="lazy" />
                     </span>
 
                     <div class="package-card__body">
                       <h3 class="package-card__title">{item.title}</h3>
                       <p class="package-card__description">{item.description}</p>
+                      {
+                        item.link && (
+                          <span class="package-card__link-hint">
+                            View on pub.dev <span aria-hidden="true">↗</span>
+                          </span>
+                        )
+                      }
                     </div>
                   </a>
                 </li>
@@ -215,33 +159,137 @@ const [github, x] = hero.socials
             }
           </ul>
         </section>
-
-        <div class="divider" aria-hidden="true"></div>
-
-        <footer>
-          <p>
-            <span data-copy="zh">在其他地方找到我</span>
-            <span data-copy="en">Find me elsewhere</span>
-          </p>
-          <nav data-socials aria-label="社交媒体">
-            {
-              github && (
-                <a href={github.url} rel="me noreferrer">
-                  GitHub
-                </a>
-              )
-            }
-            {
-              x && (
-                <a href={x.url} rel="me noreferrer">
-                  X / Twitter
-                </a>
-              )
-            }
-          </nav>
-        </footer>
       </article>
     </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="footer-promo">
+          <a
+            class="footer-promo__brand"
+            href={footer.promo.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="footer-promo__logo" viewBox="0 0 32 32" aria-hidden="true">
+              <defs>
+                <linearGradient id="footer-promo-gradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#ff7f4d"></stop>
+                  <stop offset="1" stop-color="#f43f3c"></stop>
+                </linearGradient>
+              </defs>
+              <g fill="url(#footer-promo-gradient)">
+                <rect x="2.5" y="2.5" width="27" height="22" rx="7.5"></rect>
+                <path d="M9.5 23h5.6L9.5 30.6Z"></path>
+              </g>
+              <path
+                class="footer-promo__heart"
+                transform="translate(8.9 6.4) scale(0.6)"
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              ></path>
+            </svg>
+            <span class="footer-promo__name">{footer.promo.brand}</span>
+          </a>
+
+          <p class="footer-promo__headline">
+            <span class="footer-promo__headline-strong">{footer.promo.headline}</span>{' '}
+            <span class="footer-promo__headline-muted">{footer.promo.headlineMuted}</span>
+          </p>
+
+          <p class="footer-promo__links">
+            {
+              footer.promo.links.map((link, index) => (
+                <>
+                  {index > 0 && (
+                    <span class="footer-promo__separator" aria-hidden="true">
+                      /
+                    </span>
+                  )}
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">
+                    {link.label}
+                  </a>
+                </>
+              ))
+            }
+          </p>
+        </div>
+
+        <div class="footer-info">
+          <div class="footer-info__grid">
+            {
+              footer.columns.map((column) => (
+                <div class="footer-column">
+                  <h2 class="footer-column__title">{column.title}</h2>
+                  <ul class="footer-column__list">
+                    {column.links.map((link) => (
+                      <li>
+                        <a href={link.href}>{link.label}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            }
+
+            <ul class="footer-socials">
+              {
+                hero.socials.map((social) => (
+                  <li>
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="me noopener noreferrer"
+                      title={social.name}
+                    >
+                      <span class="sr-only">{social.name}</span>
+                      {social.name.toLowerCase() === 'github' && (
+                        <svg class="footer-socials__icon" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6a4.7 4.7 0 0 1 1.2-3.2 4.4 4.4 0 0 1 .1-3.2s1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2a4.4 4.4 0 0 1 .1 3.2 4.7 4.7 0 0 1 1.2 3.2c0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z" />
+                        </svg>
+                      )}
+                      {(social.name.toLowerCase() === 'x' ||
+                        social.name.toLowerCase() === 'twitter') && (
+                        <svg class="footer-socials__icon" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M18.9 1.2h3.7l-8 9.2L24 22.8h-7.4l-5.8-7.6-6.6 7.6H.5l8.6-9.8L0 1.2h7.6l5.2 6.9 6.1-6.9Zm-1.3 19.5h2L6.5 3.2h-2.2l13.3 17.5Z" />
+                        </svg>
+                      )}
+                      {!['github', 'x', 'twitter'].includes(social.name.toLowerCase()) && (
+                        <svg
+                          class="footer-socials__icon footer-socials__icon--outline"
+                          viewBox="0 0 24 24"
+                          stroke-width="1.7"
+                          aria-hidden="true"
+                        >
+                          <circle cx="12" cy="12" r="9.4" />
+                          <path d="M3.4 12h17.2M12 2.6c2.6 2.6 3.9 5.9 3.9 9.4s-1.3 6.8-3.9 9.4c-2.6-2.6-3.9-5.9-3.9-9.4S9.4 5.2 12 2.6Z" />
+                        </svg>
+                      )}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="footer-info__bottom">
+            <a class="footer-brand" href="/">
+              <span class="footer-brand__text">{site.title}</span>
+              <span class="footer-brand__dot" aria-hidden="true"></span>
+            </a>
+            <p class="footer-copyright">
+              &copy; {thisYear}
+              {site.title}. {footer.copyright.text}
+            </p>
+            <p class="footer-credit">
+              {footer.credit.label}{' '}
+              <a href={footer.credit.href} target="_blank" rel="noopener noreferrer">
+                {footer.credit.name}
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script is:inline>
       const siteNav = document.querySelector('[data-site-nav]')
@@ -320,7 +368,7 @@ const [github, x] = hero.socials
     position: relative;
     width: min(100% - 3rem, 54rem);
     margin: 0 auto;
-    padding: clamp(3.5rem, 8vw, 6rem) 0 4rem;
+    padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(3rem, 6vw, 4.5rem);
   }
 
   .site-nav {
@@ -436,18 +484,6 @@ const [github, x] = hero.socials
       justify-self: center;
       column-gap: 1.25rem;
     }
-  }
-
-  [data-copy='en'] {
-    display: none;
-  }
-
-  html[data-lang='en'] [data-copy='zh'] {
-    display: none;
-  }
-
-  html[data-lang='en'] [data-copy='en'] {
-    display: inline;
   }
 
   article {
@@ -625,34 +661,229 @@ const [github, x] = hero.socials
     outline-offset: 4px;
   }
 
-  .divider {
-    width: 4rem;
-    height: 1px;
-    margin: 3.75rem auto 2.75rem;
-    background: #d9d9d6;
+  .site-footer {
+    width: min(100% - 2.5rem, 1160px);
+    margin: 0 auto;
+    padding-bottom: clamp(2.5rem, 6vw, 4rem);
   }
 
-  footer {
-    color: #5d5d5d;
-    font-size: 1.18rem;
+  .site-footer__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: clamp(0.75rem, 1.5vw, 1.15rem);
+    padding: clamp(0.75rem, 1.5vw, 1.15rem);
+    border: 1px solid #ececea;
+    border-radius: 1.9rem;
+    background: rgb(255 255 255 / 62%);
   }
 
-  html[data-lang='zh'] footer {
-    font-size: 1.1rem;
-  }
-
-  footer > p {
-    margin: 0 0 1rem;
-  }
-
-  nav {
+  .footer-promo {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem 1.1rem;
+    min-height: 100%;
+    flex-direction: column;
+    gap: clamp(1.75rem, 4vw, 3rem);
+    padding: clamp(1.45rem, 2.8vw, 2.3rem);
+    border-radius: 1.45rem;
+    color: #fff;
+    background: #0a0a0a;
   }
 
-  nav a {
-    color: #262626;
+  .footer-promo__brand {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.7rem;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .footer-promo__brand:hover {
+    color: #fff;
+  }
+
+  .footer-promo__logo {
+    width: 2.1rem;
+    height: 2.1rem;
+    flex: none;
+  }
+
+  .footer-promo__heart {
+    fill: #fff;
+  }
+
+  .footer-promo__name {
+    font-size: 1.02rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-promo__headline {
+    margin: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.05rem, 1.5vw, 1.32rem);
+    line-height: 1.45;
+    letter-spacing: -0.015em;
+    text-wrap: pretty;
+  }
+
+  .footer-promo__headline-strong {
+    color: #fff;
+  }
+
+  .footer-promo__headline-muted {
+    color: #77776f;
+  }
+
+  .footer-promo__links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin: auto 0 0;
+    color: #6f6f68;
+    font-size: 0.92rem;
+  }
+
+  .footer-promo__links a {
+    color: #b0b0a8;
+    text-decoration: none;
+  }
+
+  .footer-promo__links a:hover {
+    color: #fff;
+  }
+
+  .footer-promo__separator {
+    color: #4a4a45;
+  }
+
+  .footer-info {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.35rem, 2.6vw, 2.2rem);
+    border-radius: 1.45rem;
+    background: #f4f4f2;
+  }
+
+  .footer-info__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    gap: clamp(1.6rem, 3vw, 2.6rem) clamp(1rem, 2vw, 1.8rem);
+  }
+
+  .footer-column__title {
+    margin: 0;
+    color: #131313;
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .footer-column__list {
+    display: grid;
+    gap: 1.05rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    font-size: 0.94rem;
+    line-height: 1.45;
+    list-style: none;
+  }
+
+  .footer-column__list a {
+    color: #a0a09a;
+    text-decoration: none;
+  }
+
+  .footer-column__list a:hover {
+    color: #131313;
+  }
+
+  .footer-socials {
+    display: flex;
+    align-items: flex-start;
+    justify-self: end;
+    gap: 1.15rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .footer-socials a {
+    display: inline-flex;
+    width: 1.35rem;
+    height: 1.35rem;
+    color: #131313;
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .footer-socials a:hover {
+    color: #7c7c76;
+  }
+
+  .footer-socials__icon {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .footer-socials__icon--outline {
+    fill: none;
+    stroke: currentColor;
+  }
+
+  .footer-info__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.2rem 2rem;
+    margin-top: clamp(2rem, 4vw, 3.25rem);
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    align-items: baseline;
+    color: #0f0f0f;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .footer-brand:hover {
+    color: #0f0f0f;
+  }
+
+  .footer-brand__dot {
+    width: 0.28em;
+    height: 0.28em;
+    margin-left: 0.12em;
+    border-radius: 50%;
+    background: #f55555;
+  }
+
+  .footer-copyright,
+  .footer-credit {
+    margin: 0;
+    color: #8d8d87;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .footer-copyright {
+    max-width: 15rem;
+  }
+
+  .footer-credit a {
+    color: #131313;
+    text-decoration: none;
+  }
+
+  .footer-credit a:hover {
+    text-decoration: underline;
   }
 
   .packages {
@@ -665,12 +896,38 @@ const [github, x] = hero.socials
     text-align: center;
   }
 
+  .packages__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .packages__link h2 {
+    transition: color 160ms ease;
+  }
+
   .packages__eyebrow {
     margin: 0;
     color: #888884;
     font-size: 0.72rem;
     line-height: 1.2;
     letter-spacing: 0.14em;
+    transition: color 160ms ease;
+  }
+
+  .packages__eyebrow-arrow {
+    margin-left: 0.3em;
+    font-size: 0.95em;
+    letter-spacing: 0;
+  }
+
+  .packages__link:hover,
+  .packages__link:hover h2 {
+    color: #55554f;
+  }
+
+  .packages__link:hover .packages__eyebrow {
+    color: #55554f;
   }
 
   .packages__title {
@@ -745,8 +1002,6 @@ const [github, x] = hero.socials
   }
 
   .package-card__icon {
-    --pixel-magenta: #f22bcf;
-    --pixel-orange: #f4511e;
     display: grid;
     width: 100%;
     min-height: 9rem;
@@ -758,17 +1013,6 @@ const [github, x] = hero.socials
   .package-icon {
     width: min(100%, 7.75rem);
     height: auto;
-    overflow: visible;
-  }
-
-  .pixel--magenta {
-    fill: var(--pixel-magenta);
-    stroke: var(--pixel-magenta);
-  }
-
-  .pixel--orange {
-    fill: var(--pixel-orange);
-    stroke: var(--pixel-orange);
   }
 
   .package-card__body {
@@ -794,7 +1038,36 @@ const [github, x] = hero.socials
     line-height: 1.55;
   }
 
+  .package-card__link-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 1rem;
+    color: #3467d6;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  a.package-card[href]:hover .package-card__link-hint {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
   @media (max-width: 900px) {
+    .site-footer__inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .footer-info__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .footer-socials {
+      grid-column: 1 / -1;
+      justify-self: start;
+    }
+
     .packages__grid {
       max-width: 32rem;
       grid-template-columns: 1fr;
@@ -822,8 +1095,18 @@ const [github, x] = hero.socials
       padding-top: 3rem;
     }
 
-    .divider {
-      margin-top: 3rem;
+    .site-footer {
+      width: min(100% - 2rem, 1160px);
+    }
+
+    .footer-info__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .footer-info__bottom {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .hero__title {
@@ -939,12 +1222,7 @@ const [github, x] = hero.socials
     background: #262624;
   }
 
-  html[data-theme='dark'] footer {
-    color: #b8b8b2;
-  }
-
-  html[data-theme='dark'] a,
-  html[data-theme='dark'] nav a {
+  html[data-theme='dark'] a {
     color: #efefeb;
     text-decoration-color: #686864;
   }
@@ -953,13 +1231,79 @@ const [github, x] = hero.socials
     color: #fff;
   }
 
-  html[data-theme='dark'] .divider {
-    background: #3c3c39;
+  html[data-theme='dark'] .site-footer__inner {
+    border-color: #2b2b28;
+    background: rgb(255 255 255 / 3%);
+  }
+
+  html[data-theme='dark'] .footer-promo {
+    background: #141413;
+  }
+
+  html[data-theme='dark'] .footer-promo__brand,
+  html[data-theme='dark'] .footer-promo__brand:hover {
+    color: #f4f4f1;
+  }
+
+  html[data-theme='dark'] .footer-promo__links a {
+    color: #a9a9a3;
+  }
+
+  html[data-theme='dark'] .footer-promo__links a:hover {
+    color: #fff;
+  }
+
+  html[data-theme='dark'] .footer-info {
+    background: #1c1c1a;
+  }
+
+  html[data-theme='dark'] .footer-column__title {
+    color: #f2f2ee;
+  }
+
+  html[data-theme='dark'] .footer-column__list a {
+    color: #9c9c96;
+  }
+
+  html[data-theme='dark'] .footer-column__list a:hover {
+    color: #fff;
+  }
+
+  html[data-theme='dark'] .footer-socials a {
+    color: #f2f2ee;
+  }
+
+  html[data-theme='dark'] .footer-socials a:hover {
+    color: #b0b0a8;
+  }
+
+  html[data-theme='dark'] .footer-brand,
+  html[data-theme='dark'] .footer-brand:hover {
+    color: #f4f4f1;
+  }
+
+  html[data-theme='dark'] .footer-copyright,
+  html[data-theme='dark'] .footer-credit {
+    color: #9c9c96;
+  }
+
+  html[data-theme='dark'] .footer-credit a {
+    color: #f2f2ee;
   }
 
   html[data-theme='dark'] .packages__eyebrow,
   html[data-theme='dark'] .package-card__description {
     color: #a9a9a3;
+  }
+
+  html[data-theme='dark'] .package-card__link-hint {
+    color: #83a9ff;
+  }
+
+  html[data-theme='dark'] .packages__link:hover,
+  html[data-theme='dark'] .packages__link:hover h2,
+  html[data-theme='dark'] .packages__link:hover .packages__eyebrow {
+    color: #d8d8d2;
   }
 
   html[data-theme='dark'] .packages__title,
@@ -986,11 +1330,6 @@ const [github, x] = hero.socials
     box-shadow: none;
   }
 
-  html[data-theme='dark'] .package-card__icon {
-    --pixel-magenta: #ff65df;
-    --pixel-orange: #ff7a4d;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     a,
     :root,
@@ -998,7 +1337,9 @@ const [github, x] = hero.socials
     .site-nav__inner,
     .hero__social,
     .button,
-    .package-card {
+    .package-card,
+    .packages__eyebrow,
+    .packages__link h2 {
       transition: none;
     }
   }

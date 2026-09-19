@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 132" fill="none">
+  <title>Kinetic Gallery</title>
+  <defs>
+    <linearGradient id="gallery-gradient" x1="31" y1="27" x2="145" y2="111" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF2BCB"/>
+      <stop offset="1" stop-color="#A735FF"/>
+    </linearGradient>
+    <filter id="gallery-shadow" x="17" y="16" width="148" height="113" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#A735FF" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <g filter="url(#gallery-shadow)">
+    <rect x="30" y="29" width="104" height="75" rx="12" fill="#FFF" stroke="url(#gallery-gradient)" stroke-width="6"/>
+    <path d="M42 87 62 67l14 13 17-23 29 30H42Z" fill="url(#gallery-gradient)" opacity=".92"/>
+    <circle cx="59" cy="50" r="8" fill="#FF2BCB"/>
+    <rect x="125" y="43" width="25" height="47" rx="7" fill="#FF2BCB"/>
+    <path d="m141 58 8 8-8 8" stroke="#FFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <path d="M51 114h62" stroke="#FF2BCB" stroke-width="6" stroke-linecap="round"/>
+  <path d="M70 114v-10h25v10" stroke="#FF2BCB" stroke-width="6" stroke-linejoin="round"/>
+</svg>

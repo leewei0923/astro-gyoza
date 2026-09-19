@@ -1,7 +1,7 @@
 {
   "site": {
     "url": "https://leewei0923.com",
-    "title": "满河星",
+    "title": "leewei0923",
     "description": "leewei的个人博客网站;leewei's blog site;",
     "keywords": "Gyoza,blog,Astro,leewei,leewei0923;博客",
     "lang": "en",
@@ -16,10 +16,10 @@
   "hero": {
     "name": "leewei",
     "headline": {
-      "lead": "Short content builds",
-      "accent": "influence"
+      "lead": "Ideas become",
+      "accent": "experiences"
     },
-    "subheadline": "We help individuals and businesses take control of their content, strategy, and consistent execution across every platform",
+    "subheadline": "I turn ideas into thoughtful digital products, open-source Flutter packages, and stories worth sharing.",
     "actions": [
       {
         "label": "Book A Call",
@@ -108,7 +108,54 @@
     "perPage": 10
   },
   "footer": {
-    "startTime": "2024-05-30T00:00:00Z"
+    "startTime": "2024-05-30T00:00:00Z",
+    "promo": {
+      "brand": "Shiji",
+      "href": "https://shiji.7miaoyu.com/",
+      "headline": "Keep the moments worth remembering,",
+      "headlineMuted": "all in Shiji — a record system that belongs only to you.",
+      "links": [
+        { "label": "Privacy Policy", "href": "https://shiji.7miaoyu.com/" },
+        { "label": "Terms of Use", "href": "https://shiji.7miaoyu.com/" }
+      ]
+    },
+    "columns": [
+      {
+        "title": "Quick Links",
+        "links": [
+          { "label": "Home", "href": "/" },
+          { "label": "Blog", "href": "/blog" },
+          { "label": "Projects", "href": "/projects" },
+          { "label": "About", "href": "/mine" },
+          { "label": "Friends", "href": "/friends" }
+        ]
+      },
+      {
+        "title": "Utilities Pages",
+        "links": [
+          { "label": "Archives", "href": "/blog/archives" },
+          { "label": "Books", "href": "/books" },
+          { "label": "Gallery", "href": "/gallery" },
+          { "label": "RSS", "href": "/rss.xml" },
+          { "label": "Sitemap", "href": "/sitemap-index.xml" }
+        ]
+      },
+      {
+        "title": "Find Me Elsewhere",
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/leewei0923" },
+          { "label": "X / Twitter", "href": "https://twitter.com/Leewei60269181" }
+        ]
+      }
+    ],
+    "copyright": {
+      "text": "All rights reserved."
+    },
+    "credit": {
+      "label": "Made by",
+      "name": "leewei",
+      "href": "https://github.com/leewei0923"
+    }
   },
   "docSearch": {
     "appId": "",
@@ -127,27 +174,28 @@
   "flutterPackages": {
     "eyebrow": "FLUTTER PACKAGES",
     "title": "Tools built for Flutter developers.",
+    "href": "https://pub.dev/publishers/leewei0923.com/packages",
     "items": [
       {
         "step": "01",
-        "title": "Package 01",
-        "description": "Replace this with a short description of your first Flutter package.",
-        "link": "",
-        "icon": "display"
+        "title": "kinetic_gallery",
+        "description": "Gesture-driven Flutter galleries featuring dynamic hero carousels and virtualized, zoomable infinite masonry spaces.",
+        "link": "https://pub.dev/packages/kinetic_gallery",
+        "image": "/images/packages/kinetic-gallery.svg"
       },
       {
         "step": "02",
-        "title": "Package 02",
-        "description": "Replace this with a short description of your second Flutter package.",
-        "link": "",
-        "icon": "workflow"
+        "title": "card_deck_view",
+        "description": "A smooth, physics-driven card deck with continuous stack interpolation, controllers, and cross-platform gestures.",
+        "link": "https://pub.dev/packages/card_deck_view",
+        "image": "/images/packages/card-deck-view.svg"
       },
       {
         "step": "03",
-        "title": "Package 03",
-        "description": "Replace this with a short description of your third Flutter package.",
-        "link": "",
-        "icon": "notes"
+        "title": "huahua_motion",
+        "description": "Composable, focus-driven motion primitives for Flutter interfaces.",
+        "link": "https://pub.dev/packages/huahua_motion",
+        "image": "/images/packages/huahua-motion.svg"
       }
     ]
   },
