@@ -1,11 +1,13 @@
 import { createPortal } from 'react-dom'
 
 export function RootPortal({
-  to = document.body,
+  to,
   children,
 }: {
   to?: HTMLElement
   children: React.ReactNode
 }) {
-  return createPortal(children, to)
+  if (typeof document === 'undefined') return null
+
+  return createPortal(children, to ?? document.body)
 }

@@ -26,7 +26,7 @@ function AnimatedMenu() {
   return (
     <AnimatePresence>
       {!shouldHeaderMetaShow && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <motion.div initial={false} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
           <HeaderMenu isBgShow={shouldBgShow} />
         </motion.div>
       )}
