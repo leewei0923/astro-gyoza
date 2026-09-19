@@ -1,0 +1,353 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro'
+import { Comments } from '@/components/comment'
+
+const prompts = [
+  {
+    number: '01',
+    title: '说声你好',
+    text: '告诉我你从哪里来，又是怎么发现这里的。',
+    tone: 'pink',
+  },
+  {
+    number: '02',
+    title: '交换灵感',
+    text: '分享一个最近让你兴奋的想法、作品或项目。',
+    tone: 'orange',
+  },
+  {
+    number: '03',
+    title: '留下建议',
+    text: '关于博客、Flutter 或独立开发，我都很想听听。',
+    tone: 'blue',
+  },
+]
+---
+
+<PageLayout title="留言板" description="欢迎在这里留下你的想法、建议与问候。">
+  <div class="guestbook-page">
+    <div class="guestbook-glow guestbook-glow--pink" aria-hidden="true"></div>
+    <div class="guestbook-glow guestbook-glow--orange" aria-hidden="true"></div>
+
+    <header class="guestbook-hero">
+      <p class="guestbook-kicker">
+        <span class="guestbook-kicker__dot" aria-hidden="true"></span>
+        GUESTBOOK · 留言板
+      </p>
+      <h1>
+        <span class="guestbook-title__line">留点什么，</span>
+        <span class="guestbook-title__line guestbook-title__accent">再走吧。</span>
+      </h1>
+      <p class="guestbook-lead">
+        网络让我们偶然相遇，而一段留言会让这次相遇留下痕迹。问候、灵感、建议，或者只是今天的心情，都欢迎写在这里。
+      </p>
+    </header>
+
+    <ul class="prompt-grid" aria-label="留言灵感">
+      {
+        prompts.map((prompt) => (
+          <li class={`prompt-card prompt-card--${prompt.tone}`}>
+            <div class="prompt-card__topline">
+              <span class="prompt-card__number">NOTE {prompt.number}</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 19 6.2 14.2 16.8 3.6a2.1 2.1 0 0 1 3 3L9.2 17.2 5 19Z" />
+                <path d="m14.8 5.6 3.6 3.6M6.2 14.2l3 3" />
+              </svg>
+            </div>
+            <h2>{prompt.title}</h2>
+            <p>{prompt.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <section class="message-board" aria-labelledby="message-board-title">
+      <div class="message-board__tape" aria-hidden="true"></div>
+      <header class="message-board__header">
+        <div>
+          <p class="message-board__eyebrow">WRITE A NOTE</p>
+          <h2 id="message-board-title">把你的想法留在这里</h2>
+        </div>
+        <div class="message-board__stamp" aria-hidden="true">
+          <svg viewBox="0 0 32 32">
+            <path d="M16 27S5 21 5 12.5A6.5 6.5 0 0 1 16 7.8a6.5 6.5 0 0 1 11 4.7C27 21 16 27 16 27Z" />
+          </svg>
+        </div>
+      </header>
+
+      <div class="message-board__rule" aria-hidden="true"></div>
+
+      <div class="message-board__tips">
+        <span>使用 GitHub 账号留言</span>
+        <span aria-hidden="true">·</span>
+        <span>支持 Markdown</span>
+        <span aria-hidden="true">·</span>
+        <span>友善交流</span>
+      </div>
+
+      <div class="message-board__comments">
+        <Comments term="guestbook" />
+      </div>
+    </section>
+  </div>
+</PageLayout>
+
+<style>
+  .guestbook-page {
+    position: relative;
+    width: min(100% - 2rem, 68rem);
+    margin: 0 auto;
+    padding: clamp(4rem, 9vw, 7.5rem) 0 clamp(5rem, 10vw, 8rem);
+    overflow: hidden;
+  }
+
+  .guestbook-glow {
+    position: absolute;
+    z-index: -1;
+    width: 24rem;
+    height: 24rem;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  .guestbook-glow--pink {
+    top: 2rem;
+    left: -12rem;
+    background: #ff36c8;
+  }
+
+  .guestbook-glow--orange {
+    top: 14rem;
+    right: -14rem;
+    background: #ff6b2c;
+  }
+
+  .guestbook-hero {
+    max-width: 47rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .guestbook-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin: 0;
+    color: rgb(var(--color-text-secondary));
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+
+  .guestbook-kicker__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #ff4db8;
+    box-shadow: 0 0 0 5px rgb(255 77 184 / 12%);
+  }
+
+  .guestbook-hero h1 {
+    margin: 1.25rem 0 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 400;
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  .guestbook-title__line {
+    display: block;
+  }
+
+  .guestbook-hero h1 .guestbook-title__accent {
+    color: rgb(var(--color-accent));
+    font-style: italic;
+  }
+
+  .guestbook-lead {
+    max-width: 39rem;
+    margin: 1.65rem auto 0;
+    color: rgb(var(--color-text-secondary));
+    font-size: clamp(0.95rem, 2vw, 1.08rem);
+    line-height: 1.9;
+  }
+
+  .prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin: clamp(3rem, 7vw, 5rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .prompt-card {
+    min-height: 12rem;
+    padding: 1.35rem;
+    border: 1px solid rgb(var(--color-border-primary));
+    border-radius: 1.15rem;
+    background: rgb(var(--color-bg-secondary) / 72%);
+    box-shadow: 0 18px 45px rgb(20 20 20 / 4%);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .prompt-card:nth-child(1) {
+    transform: rotate(-1.2deg);
+  }
+
+  .prompt-card:nth-child(3) {
+    transform: rotate(1.2deg);
+  }
+
+  .prompt-card:hover {
+    box-shadow: 0 22px 50px rgb(20 20 20 / 8%);
+    transform: translateY(-4px) rotate(0deg);
+  }
+
+  .prompt-card__topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .prompt-card__number {
+    color: rgb(var(--color-text-secondary));
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .prompt-card svg {
+    width: 1.3rem;
+    height: 1.3rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+  }
+
+  .prompt-card--pink svg { color: #ed3eaf; }
+  .prompt-card--orange svg { color: #f1682d; }
+  .prompt-card--blue svg { color: #4776df; }
+
+  .prompt-card h2 {
+    margin: 2.5rem 0 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  .prompt-card p {
+    margin: 0.7rem 0 0;
+    color: rgb(var(--color-text-secondary));
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .message-board {
+    position: relative;
+    margin-top: clamp(4rem, 8vw, 6rem);
+    padding: clamp(1.3rem, 4vw, 2.75rem);
+    border: 1px solid rgb(var(--color-border-primary));
+    border-radius: 1.5rem;
+    background: rgb(var(--color-bg-primary));
+    box-shadow: 0 28px 80px rgb(20 20 20 / 7%);
+  }
+
+  .message-board__tape {
+    position: absolute;
+    top: -0.8rem;
+    left: 50%;
+    width: 7rem;
+    height: 1.7rem;
+    background: rgb(255 213 102 / 55%);
+    transform: translateX(-50%) rotate(-1.5deg);
+  }
+
+  .message-board__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .message-board__eyebrow {
+    margin: 0;
+    color: rgb(var(--color-accent));
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .message-board__header h2 {
+    margin: 0.45rem 0 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+    font-weight: 400;
+  }
+
+  .message-board__stamp {
+    display: grid;
+    width: 3.25rem;
+    height: 3.25rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px dashed #ed3eaf;
+    border-radius: 50%;
+    color: #ed3eaf;
+    transform: rotate(8deg);
+  }
+
+  .message-board__stamp svg {
+    width: 1.55rem;
+    fill: currentColor;
+  }
+
+  .message-board__rule {
+    height: 1px;
+    margin: 1.75rem 0 1rem;
+    background: repeating-linear-gradient(90deg, rgb(var(--color-border-primary)) 0 7px, transparent 7px 13px);
+  }
+
+  .message-board__tips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    color: rgb(var(--color-text-secondary));
+    font-size: 0.78rem;
+  }
+
+  .message-board__comments {
+    min-height: 12rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 720px) {
+    .prompt-grid {
+      grid-template-columns: 1fr;
+      max-width: 30rem;
+      margin-inline: auto;
+    }
+
+    .prompt-card,
+    .prompt-card:nth-child(1),
+    .prompt-card:nth-child(3) {
+      min-height: 10.5rem;
+      transform: none;
+    }
+
+    .prompt-card h2 {
+      margin-top: 1.8rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prompt-card {
+      transition: none;
+    }
+  }
+</style>

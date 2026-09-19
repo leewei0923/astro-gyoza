@@ -94,6 +94,11 @@
       "icon": "icon-archive"
     },
     {
+      "name": "留言",
+      "link": "/guestbook",
+      "icon": "icon-pen"
+    },
+    {
       "name": "关于",
       "link": "/mine",
       "icon": "icon-ghost"
@@ -127,6 +132,7 @@
           { "label": "Blog", "href": "/blog" },
           { "label": "Projects", "href": "/projects" },
           { "label": "About", "href": "/mine" },
+          { "label": "Guestbook", "href": "/guestbook" },
           { "label": "Friends", "href": "/friends" }
         ]
       },
