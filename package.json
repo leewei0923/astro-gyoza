@@ -2,6 +2,10 @@
   "name": "astro-gyoza",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@11.20.0",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "prepare": "pnpm exec simple-git-hooks",
     "dev": "astro dev",

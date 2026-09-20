@@ -1,4 +1,7 @@
 # 允许这些依赖执行安装脚本（pnpm 默认会拦截构建脚本）
+packages:
+  - '.'
+
 allowBuilds:
   '@parcel/watcher': true
   esbuild: true
